@@ -161,7 +161,7 @@ function post($key, $escape = true) {
  */
 function setAlert($type, $messages) {
     // Jika tipe tidak terdaftar, maka $type = 'notice'
-    if (!Error::hasType($type))) {
+    if (!Error::hasType($type)) {
         $type = 'notice';
     }
 
