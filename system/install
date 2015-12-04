@@ -35,8 +35,9 @@ if ($argc > 1) {
     }
 }
 
-$dbConf = $argc >= 3 ? 'mysql://'.$argv[2] : '';
-$cleardb = getenv("CLEARDB_DATABASE_URL") ?: false;
+$dbConf     = $argc >= 3 ? 'mysql://'.$argv[2] : '';
+$rajaongkir = getenv('RAJAONGKIR_API') ?: '';
+$cleardb    = getenv('CLEARDB_DATABASE_URL') ?: false;
 if ($cleardb) {
     $base_url = getenv('APP_DOMAIN');
     $dbConf = $cleardb;
@@ -55,6 +56,7 @@ $replacements = [
     "'user' => ''"    => "'user' => '{$dbUser}'",
     "'pass' => ''"    => "'pass' => '{$dbPass}'",
     "'name' => ''"    => "'name' => '{$dbName}'",
+    "'key' => '',"    => "'key' => '{$rajaongkir}',",
 ];
 
 try {

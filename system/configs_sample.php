@@ -31,6 +31,6 @@ return [
     // Raja Ongkir API Key & URL
     'rajaongkir' => [
         'url' => 'http://rajaongkir.com/api/starter/cost',
-        'key' => '1badd4b0e4d5dfe22687148b0d1e34c5',
+        'key' => '',
     ],
 ];
