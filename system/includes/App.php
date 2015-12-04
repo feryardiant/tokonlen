@@ -37,13 +37,18 @@ class App
         session_start();
 
         // Inisiasi routing container
-        $this->add('routes', function ($c) {
+        $this->add('errors', function () {
+            return new Error;
+        });
+
+        // Inisiasi routing container
+        $this->add('routes', function () {
             return [];
         });
 
         // Inisiasi uri container
-        $this->add('uri', function ($c) {
-            return new Uri();
+        $this->add('uri', function () {
+            return new Uri;
         });
 
         // Inisiasi modules container
@@ -138,10 +143,11 @@ class App
      */
     public static function debug($enable = false)
     {
+        $app =& self::instance();
         // @link http://php.net/manual/en/function.set-error-handler.php
-        set_error_handler('Error::errHandler');
+        set_error_handler([$app->get('errors'), 'errHandler']);
         // @link http://php.net/manual/en/function.set-exception-handler.php
-        set_exception_handler('Error::excHandler');
+        set_exception_handler([$app->get('errors'), 'excHandler']);
 
         if ($enable) {
             error_reporting(E_ALL);

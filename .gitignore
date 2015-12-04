@@ -15,6 +15,7 @@ _*
 /system/configs.php
 /vendor/
 /.htaccess
+/.php-version
 
 !.gitkeep
 !index.html

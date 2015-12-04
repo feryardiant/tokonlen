@@ -57,8 +57,8 @@ class Db
             } else {
                 $this->_db->set_charset('utf8');
             }
-        } catch (Exception $e) {
-            Error::alert($e);
+        } catch (RuntimeException $e) {
+            app('errors')->alert($e);
         }
     }
 
@@ -105,7 +105,7 @@ class Db
                 App::error($this->_db->error.'<br>'.$this->_sql);
             }
         } catch (Exception $e) {
-            Error::alert($e);
+            app('errors')->alert($e);
         }
     }
 
@@ -215,7 +215,7 @@ class Db
         try {
             return $this->query('SELECT %s FROM `%s` %s', $column, $table, $where);;
         } catch (Exception $e) {
-            Error::alert($e);
+            app('errors')->alert($e);
         }
     }
 
@@ -255,7 +255,7 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            Error::alert($e);
+            app('errors')->alert($e);
         }
     }
 
@@ -281,7 +281,7 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            Error::alert($e);
+            app('errors')->alert($e);
         }
     }
 
@@ -318,7 +318,7 @@ class Db
         try {
             return $this->query("DELETE FROM `%s` %s", $table, $wheres);
         } catch (Exception $e) {
-            Error::alert($e);
+            app('errors')->alert($e);
         }
     }
 

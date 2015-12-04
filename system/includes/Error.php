@@ -2,19 +2,19 @@
 
 class Error
 {
-    public static $types = [
+    public $types = [
         'warning' => 'Oops!',
         'error'   => 'Error!',
         'notice'  => 'Info!',
         'success' => 'Success!'
     ];
 
-    public static function hasType($type)
+    public function hasType($type)
     {
-        return isset(static::$types[$type]);
+        return isset($this->types[$type]);
     }
 
-    public static function errHandler($errno, $message, $file, $line, $context)
+    public function errHandler($errno, $message, $file, $line, $context)
     {
         $die = false;
         switch ($errno) {
@@ -39,18 +39,18 @@ class Error
         }
 
         $text = $message;
-        $file = str_replace(array(ROOT, '/'), array('', DIRECTORY_SEPARATOR), $file);
+        $file = str_replace([ROOT, '/'], ['', DIRECTORY_SEPARATOR], $file);
         $message = '<strong>'.$text.'</strong> in <code>'.$file.' ('.$line.')</code>';
 
-        self::alert($message, $type, $die);
+        $this->alert($message, $type, $die);
     }
 
-    public static function excHandler($exc)
+    public function excHandler($exc)
     {
-        self::alert($exc);
+        $this->alert($exc);
     }
 
-    static function alert($message, $type = '', $die = false)
+    public function alert($message, $type = '', $die = false)
     {
         $types = self::$types;
 

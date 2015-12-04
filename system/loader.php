@@ -30,15 +30,15 @@ spl_autoload_register(function ($class) {
 $configs = new Config(require 'system/configs.php');
 
 /**
+ * Inisialisasi Aplikasi dan menerapkan konfigurasi
+ */
+$app = new App($configs);
+
+/**
  * Mengaktifkan Mode Debug, ganti 'true' ke 'false' untuk mematikan mode ini.
  * Atau cukup dengan menghapus baris tersebut.
  */
 App::debug($configs->get('debug'));
-
-/**
- * Inisialisasi Aplikasi dan menerapkan konfigurasi
- */
-$app = new App($configs);
 
 /**
  * Function Loader
