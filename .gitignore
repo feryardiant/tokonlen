@@ -11,6 +11,10 @@ _*
 *~
 
 *.sublime-*
+/asset/uploads/*
 /system/configs.php
 /vendor/
 /.htaccess
+
+!.gitkeep
+!index.html

@@ -100,6 +100,8 @@ try {
     } else {
         @copy('htaccess.txt', '.htaccess');
     }
+
+    @chmod('../asset/uploads', 775);
 } catch (RuntimeException $e) {
     $errors[] = $e->getMessage();
 } catch (Exception $e) {

@@ -9,6 +9,11 @@ class Error
         'success' => 'Success!'
     ];
 
+    public static function hasType($type)
+    {
+        return isset(static::$types[$type]);
+    }
+
     public static function errHandler($errno, $message, $file, $line, $context)
     {
         $die = false;
