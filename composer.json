@@ -1,0 +1,20 @@
+{
+    "name": "feryardiant/simple-tokonlen",
+    "description": "Simple yet Modular Basic PHP Application",
+    "keywords": ["php", "simple", "project"],
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Fery Wardiyanto",
+            "email": "ferywardiyanto@gmail.com"
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": "php system/install"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    }
+}

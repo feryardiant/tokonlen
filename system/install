@@ -1,0 +1,137 @@
+#!/usr/bin/env php
+<?php
+
+if (PHP_SAPI != 'cli') {
+    die("Sorry! this script can only be access from CLI\n");
+}
+
+function info($message) {
+    echo $message."\n";
+}
+
+function help() {
+    $er = "Usage: php system/install [BASE_URL] [DB_USER]:[DB_PASS]@[DB_HOST]/[DB_NAME]\n\n"
+        . "Which is:\n"
+        . "  BASE_URL  is your base url, example: http://localhost/my-app/, default: (empty)\n"
+        . "  DB_HOST   is mysql database hostname, default: localhost\n"
+        . "  DB_USER   is mysql database username, default: root\n"
+        . "  DB_PASS   is mysql database password, default: (empty)\n"
+        . "  DB_NAME   is mysql database name, default: (empty)\n\n"
+        . "Example Usage:\n"
+        . "  > php system/install http://localhost/my-app/ root:password@localhost/my_database'\n"
+        . "  Or, if you have no password:\n"
+        . "  > php system/install http://localhost/my-app/ root:@localhost/my_database'\n";
+
+    die($er);
+}
+
+$base_url = '';
+
+if ($argc > 1) {
+    if (($first = strtolower($argv[1])) == 'help') {
+        help();
+    } else {
+        $base_url = $first;
+    }
+}
+
+$dbConf = $argc >= 3 ? 'mysql://'.$argv[2] : '';
+$cleardb = getenv("CLEARDB_DATABASE_URL") ?: false;
+if ($cleardb) {
+    $base_url = getenv('APP_DOMAIN');
+    $dbConf = $cleardb;
+}
+
+$dbConf = $dbConf != '' ? parse_url($dbConf)                  : [];
+$dbHost = isset($dbConf['host']) ? $dbConf['host']            : '';
+$dbUser = isset($dbConf['user']) ? $dbConf['user']            : '';
+$dbPass = isset($dbConf['pass']) ? $dbConf['pass']            : '';
+$dbName = isset($dbConf['path']) ? substr($dbConf['path'], 1) : '';
+
+$errors = [];
+$replacements = [
+    "'baseurl' => ''" => "'baseurl' => '{$base_url}'",
+    "'host' => ''"    => "'host' => '{$dbHost}'",
+    "'user' => ''"    => "'user' => '{$dbUser}'",
+    "'pass' => ''"    => "'pass' => '{$dbPass}'",
+    "'name' => ''"    => "'name' => '{$dbName}'",
+];
+
+try {
+    if (!file_exists($configSample = __DIR__.'/configs_sample.php')) {
+        throw new Exception("configs_sample.php file not found.");
+    }
+
+    if (file_exists($configFile = __DIR__.'/configs.php')) {
+        @rename($configFile, $configFile.'.old');
+    }
+
+    @copy($configSample, $configFile);
+
+    $configContent = str_replace(
+        array_keys($replacements),
+        array_values($replacements),
+        file_get_contents($configFile)
+    );
+
+    if (!file_put_contents($configFile, $configContent)) {
+        throw new Exception("Oops! Failed writing new configurasion.\n");
+    }
+
+    if ($dbName != '' && file_exists($loader = __DIR__.'/loader.php')) {
+        define('ROOT', dirname(__DIR__).DIRECTORY_SEPARATOR);
+        require $loader;
+
+        if (!app('db')->import(__DIR__.'/database.sql')) {
+            throw new Exception("Oops! Failed importing database.\n");
+        }
+    }
+
+    if ($base_url && strpos($base_url, 'http://localhost') === 0) {
+        $path = str_replace('http://localhost', '', $base_url);
+        $htaccess = file_get_contents('htaccess.txt');
+        $htaccess = str_replace('RewriteBase /', 'RewriteBase '.$path, $htaccess);
+
+        if (!file_put_contents('.htaccess', $htaccess)) {
+            throw new Exception("Oops! Failed writing new .htaccess.\n");
+        }
+    } else {
+        @copy('htaccess.txt', '.htaccess');
+    }
+} catch (RuntimeException $e) {
+    $errors[] = $e->getMessage();
+} catch (Exception $e) {
+    $errors[] = $e->getMessage();
+}
+
+if (!empty($errors)) {
+    $errString = '';
+    foreach ($errors as $error) {
+        $errString .= $error."\n";
+    }
+
+    die("\nSomething went wrong with message.\n  ".$errString);
+}
+
+foreach (array('base_url', 'dbHost', 'dbUser', 'dbPass', 'dbName') as $db) {
+    $$db = $$db ?: '(empty)';
+}
+
+$in = "\nCongratulation! this app successfuly installed with configuration: \n"
+    . "   baseurl: {$base_url}\n";
+
+if ($cleardb) {
+    $in .= "  You're running on Heroku environment, please see your control panel.\n";
+} else {
+    $in .= "  hostname: {$dbHost}\n"
+        .  "  username: {$dbUser}\n"
+        .  "  password: {$dbPass}\n"
+        .  "    dbname: {$dbName}\n";
+}
+
+if ($dbName == '(empty)') {
+    $in .= "\nNote:\n  Your database isn't installed yet, you can import it manualy using sample 'storage/database.sql' file. OR\n";
+}
+
+info($in);
+exit();

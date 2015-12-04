@@ -1,0 +1,16 @@
+# Ignore OS Related/Generic
+Thumbs.db
+Desktop.ini
+.DS_Store
+.directory
+_*
+*.log
+*.old
+*.pdf
+*.zip
+*~
+
+*.sublime-*
+/system/configs.php
+/vendor/
+/.htaccess
