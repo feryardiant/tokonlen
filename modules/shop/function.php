@@ -83,6 +83,10 @@ class Shop extends Module
     {
         $data = Product::show($id)->fetchOne();
 
+        if (!$data) {
+            return $this->app->show404();
+        }
+
         return $this->render('single', [
             'heading' => $data->nama,
             'data' => $data,
