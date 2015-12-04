@@ -38,6 +38,22 @@ The installer will:
 
 everything is done, now you should open the `[baseurl]` from your favorite web browser.
 
+## Usage & Demo
+
+Live demo is available here: [http://tokonlen.projek.xyz/](http://tokonlen.projek.xyz/)
+
+Use these credential to login into it
+
+* **Admin**
+
+  _Username_: admin & _Password_: 1234
+
+* **Customer**
+
+  _Username_: pelanggan & _Password_: 1234
+
+everything is done, now you should open the `[baseurl]` from your favorite web browser.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
