@@ -32,11 +32,11 @@ $ php system/install [baseurl] [db-user]:[db-pass]@[db-host]/[db-name]
 
 The installer will:
 
-- Import `system/database.sql` to your [db-name]
-- Create & save your installation config to `system/config.php`
-- Create `.htaccess` file based on your [baseurl] installation config.
+- Import `system/database.sql` to your `[db-name]`
+- Create `system/config.php` & save your installation config.
+- Create `.htaccess` file based on your `[baseurl]` installation config.
 
-everything is done, now you should open the [baseurl] from your favorite web browser.
+everything is done, now you should open the `[baseurl]` from your favorite web browser.
 
 ## License
 
