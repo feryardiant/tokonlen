@@ -4,7 +4,7 @@
     <div class="slider">
     <?php foreach ($slides as $slide): ?>
         <div class="slide">
-            <img src="<?php echo siteUrl('asset/uploads/'.$slide->gambar) ?>" alt="<?php echo $slide->judul ?>">
+            <img src="<?php echo siteUrl('asset/uploads/'.$slide->gambar) ?>" style="width: 100%; height: 100%;" alt="<?php echo $slide->judul ?>">
             <span class="slide-text"><?php echo $slide->judul ?></span>
         </div>
     <?php endforeach ?>
