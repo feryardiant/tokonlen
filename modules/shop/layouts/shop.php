@@ -2,7 +2,7 @@
 <div id="main-contents">
 <?php if (($total = $data->count()) > 0): $i = 1; ?>
     <div class="product-list clearfix">
-    <?php foreach ($data->fetch(12) as $row): ?>
+    <?php foreach (($show = $data->fetch(12)) as $row): ?>
         <div class="product-item">
             <img src="<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>" alt="<?php echo $row->nama ?>">
             <?php echo anchor('shop/product/'.$row->id_produk, $row->nama) ?>
@@ -10,7 +10,7 @@
         </div>
         <?php if ($i % 4 == 0) echo '<hr>' ?>
     <?php $i++; endforeach; ?>
-        <?php if ($total % 4 > 0) echo '<hr>' ?>
+        <?php if (count($show) % 4 > 0) echo '<hr>' ?>
     </div>
     <?php if ($data && $total): ?>
     <div class="data-info clearfix">

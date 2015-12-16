@@ -11,7 +11,7 @@ function shopHarga($harga, $diskon) {
     $out = '';
 
     if ($diskon) {
-        $out .= '<del>Rp. '.formatAngka($harga).'</del><br>';
+        $out .= '<del>Rp. '.formatAngka($harga).'</del>';
         $out .= '<span>Rp. '.formatAngka($diskon).'</span>';
     } else {
         $out .= '<span>Rp. '.formatAngka($harga).'</span>';

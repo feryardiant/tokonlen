@@ -1189,20 +1189,25 @@ ul.alert {
   width: 170px;
 }
 
+#main-contents .price del {
+  color: #b0b0b0;
+  display: block;
+}
+
 .product-single img,
 .product-cart img {
   float: left;
+}
+
+.product-single img {
+  width: 350px;
+  height: 350px;
 }
 
 .product-single .detail,
 .product-cart .detail {
   float: left;
   margin-left: 15px;
-}
-
-.product-single img {
-  width: 350px;
-  height: 350px;
 }
 
 .product-single .detail {
@@ -1224,8 +1229,14 @@ ul.alert {
   padding-left: 95px;
 }
 
-.product-single .price {
-  line-height: 2em;
+.product-single .price del,
+.product-single .price span {
+  display: block;
+}
+
+.product-single .price span {
+  line-height: 1.4em;
+  font-size: 18px;
 }
 
 .product-cart {

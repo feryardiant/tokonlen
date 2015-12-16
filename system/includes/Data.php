@@ -126,8 +126,8 @@ class Data
     {
         if (is_null(static::$table)) return null;
 
-        if (is_numeric($terms) or is_int($terms)) {
-            $terms = [static::$primary => (int) $terms];
+        if (is_numeric($where) or is_int($where)) {
+            $where = [static::$primary => (int) $where];
         }
 
         return self::db()->delete(static::$table, $where);
