@@ -370,6 +370,7 @@ class AdminShop extends Module
                         $data['gambar'] = $upload->doUpload();
                     } catch (Exception $e) {
                         setAlert('error', $e->getMessage());
+                        return redirect($this->uri->path());
                     }
 
                     if (Product::save($data, $id)) {
@@ -379,11 +380,11 @@ class AdminShop extends Module
                             setAlert('success', 'Berhasil menambahkan produk <b>'.$data['nama'].'</b>');
                         }
 
-                        redirect('admin-shop/products');
-                    } else {
-                        setAlert('error', 'Terjadi kesalahan dalam penyimpanan produk <b>'.$data['nama'].'</b>');
-                        redirect($this->uri->path());
+                        return redirect('admin-shop/products');
                     }
+
+                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan produk <b>'.$data['nama'].'</b>');
+                    return redirect($this->uri->path());
                 } else {
                     if ($id) {
                         $this->data['data'] = Product::show([Product::primary() => $id])->fetchOne();
@@ -400,7 +401,7 @@ class AdminShop extends Module
                     setAlert('error', 'Terjadi kesalahan dalam penghapusan produk');
                 }
 
-                redirect('admin-shop/products');
+                return redirect('admin-shop/products');
                 break;
 
             default:
@@ -445,11 +446,11 @@ class AdminShop extends Module
                             setAlert('success', 'Berhasil menambahkan banner <b>'.$data['judul'].'</b>');
                         }
 
-                        redirect('admin-shop/banners');
-                    } else {
-                        setAlert('error', 'Terjadi kesalahan dalam penyimpanan banner <b>'.$data['judul'].'</b>');
-                        redirect($this->uri->path());
+                        return redirect('admin-shop/banners');
                     }
+
+                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan banner <b>'.$data['judul'].'</b>');
+                    return redirect($this->uri->path());
                 } else {
                     if ($id) {
                         $this->data['data'] = Banner::show([Banner::primary() => $id])->fetchOne();
@@ -466,7 +467,7 @@ class AdminShop extends Module
                     setAlert('error', 'Terjadi kesalahan dalam penghapusan banner');
                 }
 
-                redirect('admin-shop/banners');
+                return redirect('admin-shop/banners');
                 break;
 
             default:
@@ -497,11 +498,11 @@ class AdminShop extends Module
                             setAlert('success', 'Berhasil menambahkan kategori <b>'.$data['nama'].'</b>');
                         }
 
-                        redirect('admin-shop/categories');
-                    } else {
-                        setAlert('error', 'Terjadi kesalahan dalam penyimpanan kategori <b>'.$data['nama'].'</b>');
-                        redirect($this->uri->path());
+                        return redirect('admin-shop/categories');
                     }
+
+                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan kategori <b>'.$data['nama'].'</b>');
+                    return redirect($this->uri->path());
                 } else {
                     if ($id) {
                         $this->data['data'] = Category::show([Category::primary() => $id])->fetchOne();
@@ -518,7 +519,7 @@ class AdminShop extends Module
                     setAlert('error', 'Terjadi kesalahan dalam penghapusan kategori');
                 }
 
-                redirect('admin-shop/categories');
+                return redirect('admin-shop/categories');
                 break;
 
             default:
