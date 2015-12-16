@@ -7,6 +7,8 @@ return [
     'basename' => 'tokonlen',
     // Aktifasi debuging
     'debug' => true,
+    // Extensi file yg diijinkan untuk diupload
+    'allowed_exts' => ['jpg', 'jpeg', 'png', 'gif'],
     // Tentang Aplikasi
     'app' => [
         // Judul Aplikasi
