@@ -12,6 +12,9 @@ class Customer extends Data
      */
     protected static $primary = 'id_pelanggan';
 
+    /**
+     * {inheritdoc}
+     */
     public static function show($where = [], $sort = false)
     {
         $db = static::db();

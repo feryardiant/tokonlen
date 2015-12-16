@@ -14,11 +14,20 @@ class Order extends Data
 
     public static $statuses = ['Belum dibayar', 'Lunas'];
 
+    /**
+     * Method untuk mendapatkan nama statur order
+     *
+     * @param  int $status Status key
+     * @return string
+     */
     public static function status($status)
     {
         return isset(self::$statuses[$status]) ? self::$statuses[$status] : '-';
     }
 
+    /**
+     * {inheritdoc}
+     */
     public static function show($where = [], $sort = false)
     {
         $db = static::db();
@@ -49,6 +58,9 @@ class Order extends Data
         return $db->query($sql, $where);
     }
 
+    /**
+     * {inheritdoc}
+     */
     public static function add($data)
     {
         if ($return = static::db()->insert(static::$table, $data)) {
@@ -70,6 +82,14 @@ class Order extends Data
         return false;
     }
 
+    /**
+     * Method untuk kalkulasi item dalam keranjang belanja
+     *
+     * @param  int    $id    Item ID
+     * @param  string $do    Aksi
+     * @param  array  $items List dari item
+     * @return array
+     */
     public static function cart($id, $do, $items)
     {
         if ($do == 'add') {

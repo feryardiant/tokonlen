@@ -12,6 +12,9 @@ class Page extends Data
      */
     protected static $primary = 'id_halaman';
 
+    /**
+     * {inheritdoc}
+     */
     public static function show($where = [], $sort = false)
     {
         $db = static::db();
