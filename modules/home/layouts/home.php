@@ -19,17 +19,12 @@
         <div class="product-item" style="width: 170px">
             <img src="<?php echo siteUrl('asset/uploads/'.$product->gambar) ?>" style="width: 100%" alt="<?php echo $product->nama ?>">
             <?php echo anchor('shop/product/'.$product->id_produk, $product->nama) ?>
-        <?php if ($product->diskon): ?>
-            <del>Rp. <?php echo formatAngka($product->harga) ?></del>
-            <span>Rp. <?php echo formatAngka($product->diskon) ?></span>
-        <?php else: ?>
-            <span>Rp. <?php echo formatAngka($product->harga) ?></span>
-        <?php endif ?>
+            <?php echo shopHarga($product->harga, $product->diskon) ?>
         </div>
         <?php if ($i % 5 == 0) echo '<hr>' ?>
     <?php $i++; endforeach; ?>
     </div>
-    <?php echo anchor('shop', 'Lihat selengkapnya', array('class' => 'btn')) ?>
+    <?php echo anchor('shop', 'Lihat selengkapnya', ['class' => 'btn']) ?>
 <?php else: ?>
     <span class="alert warning no-product">Tidak ada produk.</span>
 <?php endif ?>

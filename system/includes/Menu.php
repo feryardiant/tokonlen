@@ -2,7 +2,7 @@
 
 class Menu
 {
-    protected $list = array();
+    protected $list = [];
 
     public function __construct(array $list)
     {
@@ -36,7 +36,7 @@ class Menu
         }
     }
 
-    public function compile(array $list = array(), $classAttr = '')
+    public function compile(array $list = [], $classAttr = '')
     {
         if (empty($list)) {
             $list = $this->list;
@@ -58,10 +58,10 @@ class Menu
                 if (is_string($label)) {
                     $out .= '<li'.$class.'>'.anchor($link, $label).'</li>';
                 } else {
-                    $attrs = arraySetDefaults($label, array(
+                    $attrs = arraySetDefaults($label, [
                         'label' => '',
-                        'subs'  => array(),
-                    ));
+                        'subs'  => [],
+                    ]);
 
                     $out .= '<li'.$class.'>';
                     $out .= anchor($link, $attrs['label']);

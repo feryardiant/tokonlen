@@ -1216,6 +1216,18 @@ ul.alert {
   border-top: 1px solid #ddd;
 }
 
+.product-single .meta dt {
+  width: 80px;
+}
+
+.product-single .meta dd {
+  padding-left: 95px;
+}
+
+.product-single .price {
+  line-height: 2em;
+}
+
 .product-cart {
   width: 100%;
   margin: 0 0 10px;

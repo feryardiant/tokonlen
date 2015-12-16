@@ -14,6 +14,6 @@
     </div>
     <div class="form control-action">
         <input type="submit" name="login" id="submit-btn" class="btn" value="Login">
-        <?php echo anchor('home/register', 'Registrasi', array('class' => 'btn fright')) ?>
+        <?php echo anchor('home/register', 'Registrasi', ['class' => 'btn fright']) ?>
     </div>
 </form>

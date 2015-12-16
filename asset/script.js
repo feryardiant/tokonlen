@@ -46,13 +46,11 @@ $(function () {
   })
 
   // Home Slider
-  var left  = 0, width = 930
+  var $slider = $('.slider')
+    , left  = 0, width = 930
     , total = width * $('.slide').size()
 
-  $('.slider').css({
-    width: total,
-    height: 300
-  })
+  $slider.css({ width: total, height: 300 })
 
   setInterval(function () {
     if (left >= -(total - (width * 2))) {
@@ -61,7 +59,7 @@ $(function () {
       left = 0
     }
 
-    $('.slider').css('margin-left', left)
+    $slider.css('margin-left', left)
   }, 5000)
 
   // Jquery UI Tab Trigger
@@ -117,8 +115,6 @@ $(function () {
           if (selfId == 'nama_lengkap') {
             var kota = data.kota.replace(/\s+/g, '-').replace(/\(|\)+/g, '').toLowerCase()
 
-            // console.log(kota)
-
             $('[name="id_pelanggan"]').val(data.id_pelanggan)
             $('[name="nama_lengkap"]').val(data.nama_lengkap).attr('disabled', true)
             $('[name="alamat"]').html(data.alamat).attr('disabled', true).attr('tabindex', '-1')
@@ -155,8 +151,6 @@ $(function () {
 
             self.val('')
           }
-
-          // console.log(ui.item ? ui : 'nope')
         }
       })
     }
@@ -235,6 +229,6 @@ $(function () {
       // alert('error')
       // e.preventDefault()
     }
-
   })
+
 })

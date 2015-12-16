@@ -55,6 +55,6 @@
 
     <div class="form control-action">
         <input type="submit" name="register" id="submit-btn" class="btn" value="Kirim" autofocus>
-        <?php echo anchor('home/login', 'Login', array('class' => 'btn fright')) ?>
+        <?php echo anchor('home/login', 'Login', ['class' => 'btn fright']) ?>
     </div>
 </form>

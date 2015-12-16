@@ -68,8 +68,8 @@ class Error
 
         if (PHP_SAPI == 'cli') {
             $message = str_replace(
-                array('<strong>', '</strong>', '<code>', '</code>', '<br>'),
-                array('', '', '"', '"', PHP_EOL),
+                ['<strong>', '</strong>', '<code>', '</code>', '<br>'],
+                ['', '', '"', '"', PHP_EOL],
                 $message
             );
         }

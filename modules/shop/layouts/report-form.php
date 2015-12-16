@@ -1,5 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!') ?>
-<?php require ADMIN_SIDEBAR ?>
+<?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
     <form action="<?php echo currentUrl() ?>" id="report-form" method="post" class="form" enctype="multipart/form-data">
 

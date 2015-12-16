@@ -1,5 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!') ?>
-<?php require __DIR__.'/sidebar.php' ?>
+<?php defined('ROOT') or die ('Not allowed!'); require __DIR__.'/sidebar.php'; ?>
 <div id="main-contents">
     <div class="product-cart clearfix">
     <?php if (count($items) > 0 and $data): $belanja = 0; ?>

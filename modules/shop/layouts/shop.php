@@ -1,5 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!') ?>
-<?php require __DIR__.'/sidebar.php' ?>
+<?php defined('ROOT') or die ('Not allowed!'); require __DIR__.'/sidebar.php'; ?>
 <div id="main-contents">
 <?php if (($total = $data->count()) > 0): $i = 1; ?>
     <div class="product-list clearfix">
@@ -7,15 +6,11 @@
         <div class="product-item">
             <img src="<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>" alt="<?php echo $row->nama ?>">
             <?php echo anchor('shop/product/'.$row->id_produk, $row->nama) ?>
-        <?php if ($row->diskon): ?>
-            <del>Rp. <?php echo formatAngka($row->harga) ?></del>
-            <span>Rp. <?php echo formatAngka($row->diskon) ?></span>
-        <?php else: ?>
-            <span>Rp. <?php echo formatAngka($row->harga) ?></span>
-        <?php endif ?>
+            <?php echo shopHarga($row->harga, $row->diskon) ?>
         </div>
         <?php if ($i % 4 == 0) echo '<hr>' ?>
     <?php $i++; endforeach; ?>
+        <?php if ($total % 4 > 0) echo '<hr>' ?>
     </div>
     <?php if ($data && $total): ?>
     <div class="data-info clearfix">

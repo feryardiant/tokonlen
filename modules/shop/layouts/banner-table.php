@@ -1,5 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!') ?>
-<?php require ADMIN_SIDEBAR ?>
+<?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
     <nav class="data-header toolbar">
         <?php echo anchor('admin-shop/banners/form', 'Baru', ['class' => 'btn toolbar-btn btn-edit']) ?>

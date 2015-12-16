@@ -1,5 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!') ?>
-<?php require ADMIN_SIDEBAR ?>
+<?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
     <form action="<?php echo currentUrl() ?>" id="user-form" method="post" class="form">
         <div class="control-group">
@@ -59,7 +58,7 @@
     <?php if ($data and User::is('admin')): ?>
         <fieldset>
             <legend>Belanjaan</legend>
-            <?php $orders = Order::show(array('a.id_pelanggan' => $data->id_pelanggan)) ?>
+            <?php $orders = Order::show(['a.'.Customer::primary() => $data->id_pelanggan]) ?>
             <table class="data">
                 <thead>
                     <tr>

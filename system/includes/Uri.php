@@ -48,7 +48,7 @@ class Uri
         }
 
         // Do some final cleaning of the URI and return it
-        if ($this->path = ($prefix_slash ? '/' : '').str_replace(array('//', '../'), '/', trim($uri, '/'))) {
+        if ($this->path = ($prefix_slash ? '/' : '').str_replace(['//', '../'], '/', trim($uri, '/'))) {
             $this->segments = explode('/', $this->path);
         }
     }
@@ -62,7 +62,7 @@ class Uri
     public function base($permalink = '')
     {
         $permalink = str_replace(ROOT, '', $permalink);
-        if (in_array(substr($permalink, 0, 1), array('#', '?'))) {
+        if (in_array(substr($permalink, 0, 1), ['#', '?'])) {
             $permalink = $this->path.$permalink;
         }
 

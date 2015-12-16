@@ -117,7 +117,7 @@ if (!empty($errors)) {
     die("\nSomething went wrong with message.\n  ".$errString);
 }
 
-foreach (array('base_url', 'dbHost', 'dbUser', 'dbPass', 'dbName') as $db) {
+foreach (['base_url', 'dbHost', 'dbUser', 'dbPass', 'dbName'] as $db) {
     $$db = $$db ?: '(empty)';
 }
 

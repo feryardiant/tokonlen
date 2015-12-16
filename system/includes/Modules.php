@@ -13,6 +13,10 @@ class Modules
             $modName = pathinfo($modPath, PATHINFO_BASENAME);
             $this->dirs[$modName] = $modPath;
 
+            if (file_exists($modPath.'/helpers.php')) {
+                require_once $modPath.'/helpers.php';
+            }
+
             require_once $module;
         }
     }
