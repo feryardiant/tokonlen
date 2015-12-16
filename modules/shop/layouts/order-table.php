@@ -9,8 +9,8 @@
     <table class="data">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Pelanggan</th>
+                <th><?php echo sortBy('id_order', 'ID') ?></th>
+                <th><?php echo sortBy('nama_lengkap', 'Pelanggan') ?></th>
                 <th>Tanggal</th>
                 <th>Status</th>
                 <th>Total Harga (Rp.)</th>

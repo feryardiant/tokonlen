@@ -149,7 +149,7 @@ class AdminShop extends Module
 
             default:
                 $filter = !User::is('admin') ? [Customer::primary() => User::current('id_pelanggan')] : [];
-                $this->data['data'] = Order::show($filter);
+                $this->data['data'] = Order::show($filter, get('sort'));
 
                 return $this->render('order-table', $this->data);
                 break;
@@ -337,7 +337,7 @@ class AdminShop extends Module
                 break;
 
             default:
-                $this->data['data'] = Customer::show();
+                $this->data['data'] = Customer::show([], get('sort'));
 
                 return $this->render('customer-table', $this->data);
                 break;
@@ -405,7 +405,7 @@ class AdminShop extends Module
                 break;
 
             default:
-                $this->data['data'] = Product::show();
+                $this->data['data'] = Product::show([], get('sort'));
 
                 return $this->render('product-table', $this->data);
                 break;

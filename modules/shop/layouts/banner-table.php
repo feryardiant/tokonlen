@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>Gambar</th>
-                <th>Judul</th>
+                <th><?php echo sortBy('judul', 'Judul') ?></th>
                 <th>Penayangan</th>
                 <th>Aktif</th>
                 <th>Tipe</th>

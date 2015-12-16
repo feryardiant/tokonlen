@@ -19,7 +19,7 @@ class Order extends Data
         return isset(self::$statuses[$status]) ? self::$statuses[$status] : '-';
     }
 
-    public static function show($where = [])
+    public static function show($where = [], $sort = false)
     {
         $db = static::db();
         $join_primary = Customer::primary();

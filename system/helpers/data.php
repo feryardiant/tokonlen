@@ -50,6 +50,56 @@ function arraySetValues(array $array, array $default) {
 }
 
 /**
+ * Data order
+ * -------------------------------------------------------------------------- */
+
+function sortBy($field, $label) {
+    $uri = app('uri');
+
+    // Mendapatkan nilai untuk ordering data
+    if ($sort = get('sort')) {
+        if (strpos($sort, ':') !== false) {
+            list($by, $order) = explode(':', $sort);
+            $order = strtolower($order);
+            $order = in_array($order, ['asc', 'desc']) ? $order : 'desc';
+        } else {
+            $by = $field;
+            $order = 'desc';
+        }
+
+        $order = $order == 'desc' ? 'asc' : 'desc';
+
+        if ($field !== $by) {
+            $by = $field;
+            $order = 'desc';
+        }
+
+        $sort = 'sort='.$by.':'.$order;
+    } else {
+        $sort = 'sort='.$field.':desc';
+    }
+
+    $query = [];
+    if (isset($_SERVER['QUERY_STRING'])) {
+        $query = explode('&', $_SERVER['QUERY_STRING']);
+        $query = array_filter($query, function ($val) {
+            if (strpos($val, 'sort=') === 0) {
+                return '';
+            }
+            return $val;
+        });
+    }
+
+    if (!empty($query)) {
+        $sort = '?'.implode('&', $query).'&'.$sort;
+    } else {
+        $sort = '?'.$sort;
+    }
+
+    return anchor($uri->path().$sort, $label);
+}
+
+/**
  * String Helper
  * -------------------------------------------------------------------------- */
 

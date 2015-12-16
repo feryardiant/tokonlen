@@ -7,8 +7,8 @@
     <table class="data">
         <thead>
             <tr>
-                <th>Nama</th>
-                <th>Alias</th>
+                <th><?php echo sortBy('nama', 'Nama') ?></th>
+                <th><?php echo sortBy('alias', 'Alias') ?></th>
                 <th>Keterangan</th>
                 <th>Pilihan</th>
             </tr>

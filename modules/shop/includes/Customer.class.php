@@ -12,7 +12,7 @@ class Customer extends Data
      */
     protected static $primary = 'id_pelanggan';
 
-    public static function show($where = [])
+    public static function show($where = [], $sort = false)
     {
         $db = static::db();
         $join_primary = User::primary();

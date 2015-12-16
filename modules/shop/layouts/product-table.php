@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>Gambar</th>
-                <th>Nama</th>
+                <th><?php echo sortBy('nama', 'Nama') ?></th>
                 <th>Tgl Masuk</th>
                 <th>Stok</th>
                 <th>Harga (Rp.)</th>

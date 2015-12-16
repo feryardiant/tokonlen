@@ -23,7 +23,9 @@ class Data
      */
     final protected static function db()
     {
-        return App::instance()->get('db');
+        $db = App::instance()->get('db');
+        $db->primary(static::$primary);
+        return $db;
     }
 
     /**
@@ -49,10 +51,11 @@ class Data
     /**
      * Method untuk mendapatkan data dari static::$table berdasarkan $where
      *
-     * @param  array $where Query yang dicari
+     * @param  array        $where Query yang dicari
+     * @param  false|string $sort  Sorting data
      * @return mixed
      */
-    public static function show($where = [])
+    public static function show($where = [], $sort = false)
     {
         if (is_null(static::$table)) return null;
 
@@ -60,7 +63,9 @@ class Data
             $where = [static::$primary => (int) $where];
         }
 
-        return self::db()->select(static::$table, '', $where);
+        $sort = !empty($sort) ? $sort : '';
+
+        return self::db()->select(static::$table, '', $where, $sort);
     }
 
     /**

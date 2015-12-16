@@ -10,6 +10,8 @@ class Db
 
     private $_num_rows = 0;
 
+    private $_primary = null;
+
     // Konfigurasi
     protected $configs = [
         'host' => '',
@@ -58,7 +60,8 @@ class Db
                 $this->_db->set_charset('utf8');
             }
         } catch (RuntimeException $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -105,7 +108,8 @@ class Db
                 App::error($this->_db->error.'<br>'.$this->_sql);
             }
         } catch (Exception $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -129,6 +133,7 @@ class Db
     {
         // Mendapatkan nilai untuk pembagian jumlah data ditampilkan tiap halaman
         $hal = get('hal') ?: 1;
+
         // Jika $limit bernilai 0 atau 'true' maka gunakan konfigurasi $db_limit
         if ($limit === null or $limit === true) {
             $limit = conf('db.limit');
@@ -140,10 +145,6 @@ class Db
 
         if ($this->_results) {
             $this->clear();
-        }
-
-        if (strpos($this->_sql, 'order by') !== false) {
-            $this->_sql .= ' ORDER BY id DESC';
         }
 
         $this->_sql .= ' LIMIT '.$db_limit;
@@ -205,17 +206,37 @@ class Db
      * @param   string        $column   Kolom
      * @param   array         $where    Pernyataan `where` dalam array
      * @param   bool|integer  $limit    Batasan output
+     * @param   string        $sort     Sorting data
      * @return  mixed
      */
-    public function select($table, $column = '', $where = [])
+    public function select($table, $column = '', $where = [], $sort = '')
     {
         $column or $column = '*';
+
+        $sql = 'SELECT %s FROM `%s` %s';
         $where = $this->_parseWhere($where);
 
+        // Mendapatkan nilai untuk ordering data
+        if ($sort !== '') {
+            if (strpos($sort, ':') !== false) {
+                list($by, $order) = explode(':', $sort);
+            } else {
+                $by = $sort;
+                $order = 'desc';
+            }
+
+            $order = strtolower($order);
+            $order = in_array($order, ['asc', 'desc']) ? $order : 'desc';
+            $sql .= ' ORDER BY `'.$by.'` '.$order;
+        } else {
+            $sql .= ' ORDER BY `'.$this->_primary.'` DESC';
+        }
+
         try {
-            return $this->query('SELECT %s FROM `%s` %s', $column, $table, $where);;
+            return $this->query($sql, $column, $table, $where);;
         } catch (Exception $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -255,7 +276,8 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -281,7 +303,8 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -318,7 +341,8 @@ class Db
         try {
             return $this->query("DELETE FROM `%s` %s", $table, $wheres);
         } catch (Exception $e) {
-            app('errors')->alert($e);
+            setAlert('error', $e->getMessage());
+            return false;
         }
     }
 
@@ -365,6 +389,20 @@ class Db
     public function export()
     {
         // Belum terlalu butuh, jadi ntar aja lah :P
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Helper method untuk setup primary key
+     *
+     * @param  string $name Primary key
+     * @return $this
+     */
+    public function primary($name)
+    {
+        $this->_primary = $name;
+        return $this;
     }
 
     // -------------------------------------------------------------------------
