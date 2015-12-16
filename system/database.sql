@@ -153,25 +153,25 @@ CREATE TABLE `tbl_produk` (
 
 INSERT INTO `tbl_produk` VALUES
 (1,1,1,'2015-04-12','Nama Produk 1','products.png','2015-04-12',20,10000,700,0,'Keterangan lengkap mengenai produk 1'),
-(2,2,1,'2015-04-12','Nama Produk 2','products.png','2015-04-12',20,20000,700,18000,'Keterangan lengkap mengenai produk 2'),
-(3,5,1,'2015-04-12','Nama Produk 3','products.png','2015-04-12',20,50000,700,0,'Keterangan lengkap mengenai produk 3'),
+(2,2,1,'2015-04-12','Nama Produk 2','products.png','2015-04-12',20,20000,600,18000,'Keterangan lengkap mengenai produk 2'),
+(3,5,1,'2015-04-12','Nama Produk 3','products.png','2015-04-12',20,50000,500,0,'Keterangan lengkap mengenai produk 3'),
 (4,3,1,'2015-04-12','Nama Produk 4','products.png','2015-04-12',20,30000,700,28000,'Keterangan lengkap mengenai produk 4'),
-(5,4,1,'2015-04-12','Nama Produk 5','products.png','2015-04-12',20,40000,700,0,'Keterangan lengkap mengenai produk 5'),
-(6,1,1,'2015-04-12','Nama Produk 6','products.png','2015-04-12',20,10000,700,0,'Keterangan lengkap mengenai produk 6'),
-(7,2,1,'2015-04-12','Nama Produk 7','products.png','2015-04-12',20,20000,700,19000,'Keterangan lengkap mengenai produk 7'),
-(8,4,1,'2015-04-12','Nama Produk 8','products.png','2015-04-12',20,40000,700,0,'Keterangan lengkap mengenai produk 8'),
+(5,4,1,'2015-04-12','Nama Produk 5','products.png','2015-04-12',20,40000,800,0,'Keterangan lengkap mengenai produk 5'),
+(6,1,1,'2015-04-12','Nama Produk 6','products.png','2015-04-12',20,10000,1200,0,'Keterangan lengkap mengenai produk 6'),
+(7,2,1,'2015-04-12','Nama Produk 7','products.png','2015-04-12',20,20000,500,19000,'Keterangan lengkap mengenai produk 7'),
+(8,4,1,'2015-04-12','Nama Produk 8','products.png','2015-04-12',20,40000,800,0,'Keterangan lengkap mengenai produk 8'),
 (9,5,1,'2015-04-12','Nama Produk 9','products.png','2015-04-12',20,50000,700,0,'Keterangan lengkap mengenai produk 9'),
-(10,2,1,'2015-04-12','Nama Produk 10','products.png','2015-04-12',20,20000,700,0,'Keterangan lengkap mengenai produk 10'),
-(11,1,1,'2015-04-12','Nama Produk 11','products.png','2015-04-12',20,10000,700,0,'Keterangan lengkap mengenai produk 11'),
-(12,3,1,'2015-04-12','Nama Produk 12','products.png','2015-04-12',20,30000,700,27000,'Keterangan lengkap mengenai produk 12'),
+(10,2,1,'2015-04-12','Nama Produk 10','products.png','2015-04-12',20,20000,500,0,'Keterangan lengkap mengenai produk 10'),
+(11,1,1,'2015-04-12','Nama Produk 11','products.png','2015-04-12',20,10000,1200,0,'Keterangan lengkap mengenai produk 11'),
+(12,3,1,'2015-04-12','Nama Produk 12','products.png','2015-04-12',20,30000,800,27000,'Keterangan lengkap mengenai produk 12'),
 (13,2,1,'2015-04-12','Nama Produk 13','products.png','2015-04-12',20,20000,700,0,'Keterangan lengkap mengenai produk 13'),
-(14,3,1,'2015-04-12','Nama Produk 14','products.png','2015-04-12',20,30000,700,0,'Keterangan lengkap mengenai produk 14'),
+(14,3,1,'2015-04-12','Nama Produk 14','products.png','2015-04-12',20,30000,1200,25000,'Keterangan lengkap mengenai produk 14'),
 (15,5,1,'2015-04-12','Nama Produk 15','products.png','2015-04-12',20,50000,700,0,'Keterangan lengkap mengenai produk 15'),
-(16,1,1,'2015-04-12','Nama Produk 16','products.png','2015-04-12',20,10000,700,0,'Keterangan lengkap mengenai produk 16'),
-(17,3,1,'2015-04-12','Nama Produk 17','products.png','2015-04-12',20,30000,700,0,'Keterangan lengkap mengenai produk 17'),
-(18,4,1,'2015-04-12','Nama Produk 18','products.png','2015-04-12',20,40000,700,0,'Keterangan lengkap mengenai produk 18'),
-(19,5,1,'2015-04-12','Nama Produk 19','products.png','2015-04-12',20,50000,700,0,'Keterangan lengkap mengenai produk 19'),
-(20,2,1,'2015-04-12','Nama Produk 20','products.png','2015-04-12',20,20000,700,0,'Keterangan lengkap mengenai produk 20');
+(16,1,1,'2015-04-12','Nama Produk 16','products.png','2015-04-12',20,10000,800,0,'Keterangan lengkap mengenai produk 16'),
+(17,3,1,'2015-04-12','Nama Produk 17','products.png','2015-04-12',20,30000,500,0,'Keterangan lengkap mengenai produk 17'),
+(18,4,1,'2015-04-12','Nama Produk 18','products.png','2015-04-12',20,40000,500,0,'Keterangan lengkap mengenai produk 18'),
+(19,5,1,'2015-04-12','Nama Produk 19','products.png','2015-04-12',20,50000,1200,0,'Keterangan lengkap mengenai produk 19'),
+(20,2,1,'2015-04-12','Nama Produk 20','products.png','2015-04-12',20,20000,500,0,'Keterangan lengkap mengenai produk 20');
 
 --
 -- Table structure for table `tbl_kategori`
