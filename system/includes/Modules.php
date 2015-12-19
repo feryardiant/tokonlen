@@ -49,6 +49,10 @@ class Modules
             App::error($modPath);
         }
 
+        $args = array_map(function ($val) {
+            return is_numeric($val) ? (int) $val : $val;
+        }, $args);
+
         return call_user_func_array([$Class, $method], $args);
     }
 }
