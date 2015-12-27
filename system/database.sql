@@ -16,7 +16,7 @@ CREATE TABLE `tbl_banner` (
   `aktif` tinyint(1) DEFAULT '0',
   `tipe` enum('slide','konten','samping') DEFAULT NULL,
   PRIMARY KEY (`id_banner`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_banner`
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_halaman` (
   `alias` varchar(100) NOT NULL,
   `konten` text NOT NULL,
   PRIMARY KEY (`id_halaman`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_halaman`
@@ -116,7 +116,7 @@ CREATE TABLE `tbl_pengguna` (
   PRIMARY KEY (`id_pengguna`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_pengguna`
@@ -145,7 +145,7 @@ CREATE TABLE `tbl_produk` (
   `diskon` int(11) NOT NULL,
   `keterangan` text NOT NULL,
   PRIMARY KEY (`id_produk`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_produk`
@@ -184,7 +184,7 @@ CREATE TABLE `tbl_kategori` (
   `alias` varchar(100) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_kategori`
