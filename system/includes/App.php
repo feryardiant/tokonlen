@@ -38,6 +38,10 @@ class App
 
         // Inisiasi routing container
         $this->add('errors', function () {
+            if (!class_exists('Error')) {
+                require_once __DIR__.'/Error.php';
+            }
+
             return new Error;
         });
 

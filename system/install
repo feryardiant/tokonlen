@@ -41,11 +41,11 @@ function help($exit = false) {
 $base_url = '';
 
 if ($argc > 1) {
-    if (($first = strtolower($argv[1])) == 'help') {
+    if (strtolower($argv[1]) == 'help') {
         help(true);
-    } else {
-        $base_url = $first;
     }
+
+    $base_url = strtolower($argv[1]);
 }
 
 $dbConf     = $argc >= 3 ? 'mysql://'.$argv[2] : '';
@@ -63,30 +63,35 @@ $dbPass = isset($dbConf['pass']) ? $dbConf['pass']            : '';
 $dbName = isset($dbConf['path']) ? substr($dbConf['path'], 1) : '';
 
 $errors = [];
-$replacements = [
-    "'baseurl' => ''" => "'baseurl' => '{$base_url}'",
-    "'host' => ''"    => "'host' => '{$dbHost}'",
-    "'user' => ''"    => "'user' => '{$dbUser}'",
-    "'pass' => ''"    => "'pass' => '{$dbPass}'",
-    "'name' => ''"    => "'name' => '{$dbName}'",
-    "'key' => '',"    => "'key' => '{$rajaongkir}',",
-];
 
 try {
+    if (!empty($base_url) and $base_url != '/') {
+        if (substr($base_url, 0, 4) != 'http') {
+            throw new Exception('BASE_URL should containts scheme (e.g. http://localhost/)');
+        }
+
+        if (substr($base_url, -1) != '/') {
+            throw new Exception('BASE_URL should trailed with slash (e.g. http://localhost/)');
+        }
+    } else {
+        $base_url = '/';
+    }
+
+    $replacements = [
+        "'baseurl' => ''" => "'baseurl' => '{$base_url}'",
+        "'host' => ''"    => "'host' => '{$dbHost}'",
+        "'user' => ''"    => "'user' => '{$dbUser}'",
+        "'pass' => ''"    => "'pass' => '{$dbPass}'",
+        "'name' => ''"    => "'name' => '{$dbName}'",
+        "'key' => '',"    => "'key' => '{$rajaongkir}',",
+    ];
+
     if (!file_exists($configSample = __DIR__.'/configs_sample.php')) {
         throw new Exception("configs_sample.php file not found.");
     }
 
     if (file_exists($configFile = __DIR__.'/configs.php')) {
         @rename($configFile, $configFile.'.old');
-    }
-
-    if (substr($base_url, 0, 4) !== 'http') {
-        throw new Exception('BASE_URL should containts scheme (e.g. http://localhost/)');
-    }
-
-    if (substr($base_url, 0, -1) !== '/') {
-        throw new Exception('BASE_URL should trailed with slash (e.g. http://localhost/)');
     }
 
     @copy($configSample, $configFile);
@@ -135,7 +140,7 @@ try {
 }
 
 if (!empty($errors)) {
-    array_unshift($errors, 'Something went wrong with message:');
+    array_unshift($errors, 'Something went wrong with message:'.PHP_EOL);
     e($errors, true);
 }
 
@@ -162,7 +167,7 @@ e($in);
 if ($dbName == '(empty)') {
     e([
         PHP_EOL.'Note:',
-        '  Your database isn\'t installed yet, you can import it manualy using sample \'storage/database.sql\' file. OR'.PHP_EOL
+        '  Your database isn\'t installed yet, you can import it manualy using sample \'system/database.sql\' file. OR'.PHP_EOL
     ]);
     help();
 }
