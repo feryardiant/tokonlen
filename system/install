@@ -81,6 +81,14 @@ try {
         @rename($configFile, $configFile.'.old');
     }
 
+    if (substr($base_url, 0, 4) !== 'http') {
+        throw new Exception('BASE_URL should containts scheme (e.g. http://localhost/)');
+    }
+
+    if (substr($base_url, 0, -1) !== '/') {
+        throw new Exception('BASE_URL should trailed with slash (e.g. http://localhost/)');
+    }
+
     @copy($configSample, $configFile);
 
     $configContent = str_replace(
@@ -105,6 +113,11 @@ try {
     if ($base_url && strpos($base_url, 'http://localhost') === 0) {
         $path = str_replace('http://localhost', '', $base_url);
         $htaccess = file_get_contents('htaccess.txt');
+
+        if (substr($path, 0, 1) === ':') {
+            $path = '/';
+        }
+
         $htaccess = str_replace('RewriteBase /', 'RewriteBase '.$path, $htaccess);
 
         if (!file_put_contents('.htaccess', $htaccess)) {
