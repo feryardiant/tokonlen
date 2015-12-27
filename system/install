@@ -1,35 +1,48 @@
 #!/usr/bin/env php
 <?php
 
+function e($message, $exit = false) {
+    if (is_array($message)) {
+        $tmp = '';
+        foreach ($message as $msg) {
+            $tmp .= $msg.PHP_EOL;
+        }
+        $message = $tmp;
+    }
+
+    echo $message;
+
+    if ($exit === true) {
+        echo PHP_EOL;
+        exit;
+    }
+}
+
 if (PHP_SAPI != 'cli') {
-    die("Sorry! this script can only be access from CLI\n");
+    e('Sorry! this script can only be access from CLI', true);
 }
 
-function info($message) {
-    echo $message."\n";
-}
-
-function help() {
-    $er = "Usage: php system/install [BASE_URL] [DB_USER]:[DB_PASS]@[DB_HOST]/[DB_NAME]\n\n"
-        . "Which is:\n"
-        . "  BASE_URL  is your base url, example: http://localhost/my-app/, default: (empty)\n"
-        . "  DB_HOST   is mysql database hostname, default: localhost\n"
-        . "  DB_USER   is mysql database username, default: root\n"
-        . "  DB_PASS   is mysql database password, default: (empty)\n"
-        . "  DB_NAME   is mysql database name, default: (empty)\n\n"
-        . "Example Usage:\n"
-        . "  > php system/install http://localhost/my-app/ root:password@localhost/my_database'\n"
-        . "  Or, if you have no password:\n"
-        . "  > php system/install http://localhost/my-app/ root:@localhost/my_database'\n";
-
-    die($er);
+function help($exit = false) {
+    e([
+        'Usage: php system/install [BASE_URL] [DB_USER]:[DB_PASS]@[DB_HOST]/[DB_NAME]',
+        PHP_EOL.'Which is:',
+        '  BASE_URL  is your base url, example: http://localhost/my-app/, default: (empty)',
+        '  DB_HOST   is mysql database hostname, default: localhost',
+        '  DB_USER   is mysql database username, default: root',
+        '  DB_PASS   is mysql database password, default: (empty)',
+        '  DB_NAME   is mysql database name, default: (empty)',
+        PHP_EOL.'Example Usage:',
+        '  > php system/install http://localhost/my-app/ root:password@localhost/my_database',
+        '  Or, if you have no password:',
+        '  > php system/install http://localhost/my-app/ root:@localhost/my_database',
+    ], $exit);
 }
 
 $base_url = '';
 
 if ($argc > 1) {
     if (($first = strtolower($argv[1])) == 'help') {
-        help();
+        help(true);
     } else {
         $base_url = $first;
     }
@@ -109,33 +122,36 @@ try {
 }
 
 if (!empty($errors)) {
-    $errString = '';
-    foreach ($errors as $error) {
-        $errString .= $error."\n";
-    }
-
-    die("\nSomething went wrong with message.\n  ".$errString);
+    array_unshift($errors, 'Something went wrong with message:');
+    e($errors, true);
 }
 
 foreach (['base_url', 'dbHost', 'dbUser', 'dbPass', 'dbName'] as $db) {
     $$db = $$db ?: '(empty)';
 }
 
-$in = "\nCongratulation! this app successfuly installed with configuration: \n"
-    . "   baseurl: {$base_url}\n";
+$in = [
+    'Congratulation! this app successfuly installed with configuration: ',
+    '   baseurl: '.$base_url
+];
 
 if ($cleardb) {
-    $in .= "  You're running on Heroku environment, please see your control panel.\n";
+    $in[] = '  You\'re running on Heroku environment, please see your control panel.';
 } else {
-    $in .= "  hostname: {$dbHost}\n"
-        .  "  username: {$dbUser}\n"
-        .  "  password: {$dbPass}\n"
-        .  "    dbname: {$dbName}\n";
+    $in[] = '  hostname: '.$dbHost;
+    $in[] = '  username: '.$dbUser;
+    $in[] = '  password: '.$dbPass;
+    $in[] = '    dbname: '.$dbName;
 }
+
+e($in);
 
 if ($dbName == '(empty)') {
-    $in .= "\nNote:\n  Your database isn't installed yet, you can import it manualy using sample 'storage/database.sql' file. OR\n";
+    e([
+        PHP_EOL.'Note:',
+        '  Your database isn\'t installed yet, you can import it manualy using sample \'storage/database.sql\' file. OR'.PHP_EOL
+    ]);
+    help();
 }
 
-info($in);
-exit();
+exit;
