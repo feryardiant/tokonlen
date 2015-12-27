@@ -124,23 +124,24 @@
                 </thead>
                 <tbody id="tbl-produk">
                 <?php
-                if ($data) {
+                if ($data) :
                     $products = unserialize($data->produk);
-                    $prodId = Product::primary();
-                    $ordererProducts = Product::show($prodId.' in (' . implode(',', array_keys($products)) . ')');
-                }
-                if ($data and $ordererProducts->count() > 0): foreach ($ordererProducts->fetch(false) as $product):
-                    $harga = $product->diskon ?: $product->harga;
-                    $diskon = $product->diskon ? '<br>(diskon dari: <del>' . formatAngka($product->harga) . '</del>)' : '';
-                    $subtotal = $products[$product->$prodId] * $harga; ?>
-	                    <tr>
-	                        <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/' . $product->gambar); ?>);"></span></td>
-	                        <td><?php echo '<strong>' . $product->nama . '</strong><br>' . $product->keterangan; ?></td>
-	                        <td class="acenter"><?php echo $products[$product->$prodId]; ?></td>
-	                        <td class="aright"><?php echo formatAngka($harga) . $diskon; ?></td>
-	                        <td class="aright"><?php echo formatAngka($subtotal); ?></td>
-	                    </tr>
-	                <?php endforeach; else: ?>
+                    $prodKey = Product::primary();
+                    $ordererProducts = Product::show($prodKey.' in (' . implode(',', array_keys($products)) . ')');
+
+                    if ($ordererProducts->count() > 0): foreach ($ordererProducts->fetch(false) as $product):
+                        $prodId = $product->{$prodKey};
+                        $harga = $product->diskon ?: $product->harga;
+                        $diskon = $product->diskon ? '<br>(diskon dari: <del>' . formatAngka($product->harga) . '</del>)' : '';
+                        $subtotal = $products[$prodId] * $harga; ?>
+                    <tr>
+                        <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/' . $product->gambar); ?>);"></span></td>
+                        <td><?php echo '<strong>' . $product->nama . '</strong><br>' . $product->keterangan; ?></td>
+                        <td class="acenter"><?php echo $products[$prodId]; ?></td>
+                        <td class="aright"><?php echo formatAngka($harga) . $diskon; ?></td>
+                        <td class="aright"><?php echo formatAngka($subtotal); ?></td>
+                    </tr>
+                <?php endforeach; endif; else: ?>
                     <tr class="empty"><td colspan="5" class="acenter">belum ada data</td></tr>
                 <?php endif; ?>
                 </tbody>

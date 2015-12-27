@@ -62,7 +62,7 @@ function siteUrl($permalink = '') {
  * Digunakan untuk pengalihan halaman (URL)
  *
  * @param   string  $url  URL Tujuan
- * @return  void
+ * @return  bool
  */
 function redirect($url = '', $delay = false) {
     if (PHP_SAPI != 'cli') {
@@ -75,10 +75,10 @@ function redirect($url = '', $delay = false) {
         }
 
         unset($_POST, $_GET, $_REQUEST);
-        exit();
+        return true;
     }
 
-    return;
+    return false;
 }
 
 /**

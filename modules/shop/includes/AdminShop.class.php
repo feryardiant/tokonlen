@@ -121,13 +121,11 @@ class AdminShop extends Module
                     return redirect($this->uri->path());
                 }
 
-                if ($id) {
-                    $order_data = Order::show([Order::primary() => $id])->fetchOne();
-                }
+                $order_data = $id ? Order::show($id)->fetchOne() : [];
 
                 if (
-                    !$order_data and
-                    (!User::is('admin') or $order_data->id_pelanggan == User::current('id_pelanggan'))
+                    !User::is('admin') and
+                    ($order_data and $order_data->{$customerKey} != User::current($customerKey))
                 ) {
                     return redirect('admin-shop/orders');
                 }
@@ -274,13 +272,14 @@ class AdminShop extends Module
                     if (!$id) {
                         // Jika ini adalah create submision maka, aktifkan pengguna.
                         $pengguna['aktif'] = 1;
-                    } else {
-                        // Jika merupakan update submission maka ambil data pengguna yang sudah ada.
-                        $user = Customer::show([Customer::primary() => $id])->fetchOne();
                     }
 
+                    // Jika merupakan update submission maka ambil data pengguna yang sudah ada.
+                    $user = $id ? Customer::show($id)->fetchOne() : false;
+                    $username = post('username');
+
                     // Jika username berbeda dengan yang sebelumnya
-                    if ($username = post('username') and $username != $user->username) {
+                    if ($user and $username != $user->username) {
                         $pengguna['username'] = $username;
                     }
 
@@ -310,7 +309,7 @@ class AdminShop extends Module
                                 setAlert('success', 'Berhasil menambahkan pelanggan <b>'.$pelanggan['nama'].'</b>');
                             }
                         } else {
-                            setAlert('error', 'Data yang anda masukan masih sama, tidak ada update data');
+                            setAlert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
                         }
                     } else {
                         setAlert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
@@ -320,14 +319,14 @@ class AdminShop extends Module
                 }
 
                 if ($id) {
-                    $this->data['data'] = Customer::show([Customer::primary() => $id])->fetchOne();
+                    $this->data['data'] = Customer::show($id)->fetchOne();
                 }
 
                 return $this->render('customer-form', $this->data);
                 break;
 
             case 'delete':
-                if (Customer::del([Customer::primary() => $id])) {
+                if (Customer::del($id)) {
                     setAlert('success', 'Pelanggan berhasil terhapus');
                 } else {
                     setAlert('error', 'Terjadi kesalahan dalam penghapusan pelanggan');
@@ -385,17 +384,17 @@ class AdminShop extends Module
 
                     setAlert('error', 'Terjadi kesalahan dalam penyimpanan produk <b>'.$data['nama'].'</b>');
                     return redirect($this->uri->path());
-                } else {
-                    if ($id) {
-                        $this->data['data'] = Product::show([Product::primary() => $id])->fetchOne();
-                    }
-
-                    return $this->render('product-form', $this->data);
                 }
+
+                if ($id) {
+                    $this->data['data'] = Product::show($id)->fetchOne();
+                }
+
+                return $this->render('product-form', $this->data);
                 break;
 
             case 'delete':
-                if (Product::del([Product::primary() => $id])) {
+                if (Product::del($id)) {
                     setAlert('success', 'Produk berhasil terhapus');
                 } else {
                     setAlert('error', 'Terjadi kesalahan dalam penghapusan produk');
