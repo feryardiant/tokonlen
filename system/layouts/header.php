@@ -11,9 +11,6 @@
     <!-- CSS -->
     <?php echo app('asset.css') ?>
     <!-- END CSS -->
-    <!-- JS -->
-    <?php echo app('asset.js') ?>
-    <!-- END JS -->
 </head>
 <body <?php bodyAttrs()?> data-siteurl="<?php echo site_url() ?>">
     <div class="wrapper sticky-wrap">

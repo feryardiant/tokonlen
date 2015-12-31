@@ -52,7 +52,7 @@ class Error
 
     public function alert($message, $type = '', $die = false)
     {
-        $types = self::$types;
+        $types = $this->types;
 
         if ($type == '' || !in_array($type, array_keys($types))) {
             $type = 'warning';
