@@ -1,13 +1,13 @@
 <?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
-    <form action="<?php echo currentUrl() ?>" id="user-form" method="post" class="form" enctype="multipart/form-data">
+    <form action="<?php echo current_url() ?>" id="user-form" method="post" class="form" enctype="multipart/form-data">
         <div class="control-group">
             <label class="label" for="gambar">Gambar</label>
             <div class="control-input">
                 <input type="file" name="gambar">
             <?php if ($data and $data->gambar): ?>
                 <input type="hidden" name="gambar" required value="<?php echo $data->gambar ?>">
-                <img src="<?php echo siteUrl('asset/uploads/'.$data->gambar) ?>" alt="Gambar" class="thumb">
+                <img src="<?php echo site_url('asset/uploads/'.$data->gambar) ?>" alt="Gambar" class="thumb">
             <?php endif ?>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="control-group">
             <label class="label" for="tgl_masuk">Tgl masuk</label>
             <div class="control-input">
-                <input type="text" class="jqui-datepicker" required name="tgl_masuk" id="tgl_masuk" <?php echo $data ? 'value="'.formatTanggal($data->tgl_masuk).'"' : '' ?>>
+                <input type="text" class="jqui-datepicker" required name="tgl_masuk" id="tgl_masuk" <?php echo $data ? 'value="'.format_date($data->tgl_masuk).'"' : '' ?>>
             </div>
         </div>
 

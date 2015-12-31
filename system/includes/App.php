@@ -106,13 +106,13 @@ class App
     {
         if (is_null($key)) {
             return $this->conf->allFlatten();
-        } else {
-            if (is_null($value)) {
-                return $this->conf->get($key);
-            } else {
-                $this->conf->add($key, $value);
-            }
         }
+
+        if (is_null($value)) {
+            return $this->conf->get($key);
+        }
+
+        $this->conf->add($key, $value);
     }
 
     /**
@@ -231,7 +231,7 @@ class App
 
             if (session('flash')) {
                 session('flash', null);
-                clearSession('flash');
+                session_clear('flash');
             }
         } catch (Exception $e) {
             echo $this->show404($e->getMessage());

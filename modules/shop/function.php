@@ -147,7 +147,7 @@ class Shop extends Module
             ];
 
             if (!$order['ongkir'] && !$order['kurir']) {
-                setAlert('error', 'Estimasi ongkos kirim belum ada, pastikan field kurir sudah diisi.');
+                set_alert('error', 'Estimasi ongkos kirim belum ada, pastikan field kurir sudah diisi.');
                 return redirect('cart');
             }
 
@@ -155,12 +155,12 @@ class Shop extends Module
 
             if ($return = Order::add($order)) {
                 session('cart-items', '');
-                setAlert('success', [
+                set_alert('success', [
                     'Terima kasih telah berbelanja di '.conf('app.title').'.',
                     'Segeralah melakukan pembayaran agar pesanan anda dapat secepatnya kami proses.'
                 ]);
             } else {
-                setAlert('error', 'Terjadi kesalahan dalam penghapusan order');
+                set_alert('error', 'Terjadi kesalahan dalam penghapusan order');
                 return redirect('cart');
             }
         }

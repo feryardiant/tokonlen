@@ -1,6 +1,6 @@
 <?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
-    <form action="<?php echo currentUrl() ?>" id="user-form" method="post" class="form">
+    <form action="<?php echo current_url() ?>" id="user-form" method="post" class="form">
         <div class="control-group">
             <label class="label" for="nama_lengkap">Nama lengkap</label>
             <div class="control-input">
@@ -73,9 +73,9 @@
                 <?php if ($orders->count() > 0): foreach ($orders->fetch(false) as $order): ?>
                     <tr>
                         <td class="acenter"><?php echo $order->id_order ?></td>
-                        <td class="acenter"><?php echo formatTanggal($order->tanggal) ?></td>
+                        <td class="acenter"><?php echo format_date($order->tanggal) ?></td>
                         <td class="acenter"><?php echo Order::status($order->status) ?></td>
-                        <td class="aright"><?php echo formatAngka($order->total) ?></td>
+                        <td class="aright"><?php echo format_number($order->total) ?></td>
                         <td class="action"><div class="btn-group">
                             <?php echo anchor('admin-shop/orders/form/'.$order->id_order, 'Lihat', ['class' => 'btn btn-edit']) ?>
                         </div></td>

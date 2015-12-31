@@ -5,7 +5,7 @@
     <div class="product">
         <img src="<?php echo $row->gambar ?>" width="150" height="150" alt="<?php echo $row->nama ?>">
         <?php echo anchor('shop/product/'.$row->id, $row->nama) ?>
-        <span>Rp. <?php echo formatAngka($row->harga) ?></span>
+        <span>Rp. <?php echo format_number($row->harga) ?></span>
     </div>
 <?php endforeach; endif; ?>
 </div>

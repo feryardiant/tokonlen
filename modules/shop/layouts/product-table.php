@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Gambar</th>
-                <th><?php echo sortBy('nama', 'Nama') ?></th>
+                <th><?php echo sort_by('nama', 'Nama') ?></th>
                 <th>Tgl Masuk</th>
                 <th>Stok</th>
                 <th>Harga (Rp.)</th>
@@ -17,16 +17,16 @@
         <tbody>
         <?php if (($total = $data->count()) > 0) : foreach ($data->fetch() as $row) : ?>
             <tr id="data-<?php echo $row->id_produk ?>">
-                <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>);"></span></td>
+                <td><span class="thumb" style="background-image: url(<?php echo site_url('asset/uploads/'.$row->gambar) ?>);"></span></td>
                 <td><?php echo '<strong>'.$row->nama.'</strong><br>'.$row->keterangan ?></td>
-                <td class="acenter"><?php echo formatTanggal($row->tgl_masuk) ?></td>
+                <td class="acenter"><?php echo format_date($row->tgl_masuk) ?></td>
                 <td class="acenter"><?php echo $row->stok > 0 ? $row->stok : 'Maaf stok habis' ?></td>
                 <td class="aright">
                 <?php if ($row->diskon): ?>
-                    <del><?php echo formatAngka($row->harga) ?></del><br>
-                    <span><?php echo formatAngka($row->diskon) ?></span>
+                    <del><?php echo format_number($row->harga) ?></del><br>
+                    <span><?php echo format_number($row->diskon) ?></span>
                 <?php else: ?>
-                    <span><?php echo formatAngka($row->harga) ?></span>
+                    <span><?php echo format_number($row->harga) ?></span>
                 <?php endif ?>
                 </td>
                 <td class="action"><div class="btn-group">

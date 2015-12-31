@@ -20,7 +20,7 @@
                 <td><?php echo $row->judul ?></td>
                 <td><?php echo $row->alias ?></td>
                 <td><?php echo $row->username ?></td>
-                <td class="acenter"><?php echo formatTanggal($row->tgl_input) ?></td>
+                <td class="acenter"><?php echo format_date($row->tgl_input) ?></td>
                 <td class="action"><div class="btn-group">
                     <?php echo anchor('admin/pages/form/'.$row->id_halaman, 'Lihat', ['class' => 'btn btn-edit']) ?>
                     <?php echo anchor('admin/pages/delete/'.$row->id_halaman, 'Hapus', ['class' => 'btn btn-hapus', 'data-confirm-text' => 'Apakah anda yakin ingin menghapus data ini?']) ?>

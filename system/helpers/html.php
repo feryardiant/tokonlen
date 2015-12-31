@@ -22,9 +22,9 @@ function anchor($url, $label = '', array $extras = []) {
 
     $attrs = array_merge($extras, $attrs);
     if ($attrs['href'] == '' || substr($attrs['href'], 0, 2) != '//') {
-        $attrs['href'] = siteUrl($attrs['href']);
+        $attrs['href'] = site_url($attrs['href']);
     } elseif (strpos('?', $attrs['href']) === 1) {
-        $attrs['href'] = currentUrl($attrs['href'], true);
+        $attrs['href'] = current_url($attrs['href'], true);
     }
 
     if (!isset($attrs['class']) or (isset($attrs['class']) and strpos($attrs['class'], 'btn') === false)) {

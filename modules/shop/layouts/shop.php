@@ -4,7 +4,7 @@
     <div class="product-list clearfix">
     <?php foreach (($show = $data->fetch(12)) as $row): ?>
         <div class="product-item">
-            <img src="<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>" alt="<?php echo $row->nama ?>">
+            <img src="<?php echo site_url('asset/uploads/'.$row->gambar) ?>" alt="<?php echo $row->nama ?>">
             <?php echo anchor('shop/product/'.$row->id_produk, $row->nama) ?>
             <?php echo shopHarga($row->harga, $row->diskon) ?>
         </div>

@@ -36,10 +36,10 @@ function session($key, $value = null) {
  *
  * @return  void
  */
-function clearSession($key) {
+function session_clear($key) {
     if (is_array($key)) {
         foreach ($key as $k) {
-            clearSession($k);
+            session_clear($k);
         }
     } else {
         if (isset($_SESSION[$key])) {
@@ -53,7 +53,7 @@ function clearSession($key) {
  *
  * @return  void
  */
-function dropSession() {
+function session_drop() {
     unset($_SESSION);
     session_destroy();
 }

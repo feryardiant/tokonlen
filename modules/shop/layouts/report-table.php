@@ -16,14 +16,13 @@
             <tr id="data-<?php echo $row->id_order ?>">
                 <td class="acenter"><?php echo $row->id_order ?></td>
                 <td><?php echo $row->nama_lengkap ?></td>
-                <td class="acenter"><?php echo formatTanggal($row->tanggal) ?></td>
+                <td class="acenter"><?php echo format_date($row->tanggal) ?></td>
                 <td class="acenter"><?php echo Order::status($row->status) ?></td>
-                <td class="aright"><?php echo formatAngka($row->total) ?></td>
+                <td class="aright"><?php echo format_number($row->total) ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>
     </table>
 <?php endif ?>
-    </table>
 </div>
 

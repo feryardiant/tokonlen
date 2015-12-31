@@ -1,10 +1,10 @@
 <?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
-    <form action="<?php echo currentUrl(); ?>" id="user-form" method="post" class="form" enctype="multipart/form-data">
+    <form action="<?php echo current_url(); ?>" id="user-form" method="post" class="form" enctype="multipart/form-data">
         <div class="control-group">
             <label class="label" for="tanggal">Tanggal</label>
             <div class="control-input">
-                <p class="control-static"><?php echo formatTanggal($data ? $data->tanggal : date('d-m-Y')); ?></p>
+                <p class="control-static"><?php echo format_date($data ? $data->tanggal : date('d-m-Y')); ?></p>
             </div>
         </div>
 
@@ -132,14 +132,14 @@
                     if ($ordererProducts->count() > 0): foreach ($ordererProducts->fetch(false) as $product):
                         $prodId = $product->{$prodKey};
                         $harga = $product->diskon ?: $product->harga;
-                        $diskon = $product->diskon ? '<br>(diskon dari: <del>' . formatAngka($product->harga) . '</del>)' : '';
+                        $diskon = $product->diskon ? '<br>(diskon dari: <del>' . format_number($product->harga) . '</del>)' : '';
                         $subtotal = $products[$prodId] * $harga; ?>
                     <tr>
-                        <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/' . $product->gambar); ?>);"></span></td>
+                        <td><span class="thumb" style="background-image: url(<?php echo site_url('asset/uploads/' . $product->gambar); ?>);"></span></td>
                         <td><?php echo '<strong>' . $product->nama . '</strong><br>' . $product->keterangan; ?></td>
                         <td class="acenter"><?php echo $products[$prodId]; ?></td>
-                        <td class="aright"><?php echo formatAngka($harga) . $diskon; ?></td>
-                        <td class="aright"><?php echo formatAngka($subtotal); ?></td>
+                        <td class="aright"><?php echo format_number($harga) . $diskon; ?></td>
+                        <td class="aright"><?php echo format_number($subtotal); ?></td>
                     </tr>
                 <?php endforeach; endif; else: ?>
                     <tr class="empty"><td colspan="5" class="acenter">belum ada data</td></tr>
@@ -153,9 +153,9 @@
                 <?php if ($data): ?>
                     <p class="control-static">
                     <?php if ($data->potongan): ?>
-                        <s><?php echo formatAngka($data->belanja); ?></s> <?php echo formatAngka($data->belanja - $data->potongan); ?>
+                        <s><?php echo format_number($data->belanja); ?></s> <?php echo format_number($data->belanja - $data->potongan); ?>
                     <?php else: ?>
-                        <?php echo formatAngka($data->belanja); ?>
+                        <?php echo format_number($data->belanja); ?>
                     <?php endif;?>
                     </p>
                     <input type="hidden" name="belanja" value="<?php echo $data ? $data->belanja : ''; ?>">
@@ -193,7 +193,7 @@
                 <label class="label" for="ongkir">Ongkos Kirim (Rp.)</label>
                 <div class="control-input">
                 <?php if ($data->ongkir): ?>
-                    <p class="control-static"><?php echo formatAngka($data->ongkir); ?></p>
+                    <p class="control-static"><?php echo format_number($data->ongkir); ?></p>
                     <input type="hidden" name="ongkir" value="<?php echo $data ? $data->ongkir : ''; ?>">
                 <?php else: ?>
                     <input type="text" name="ongkir" id="ongkir">
@@ -210,7 +210,7 @@
             <div class="control-group">
                 <label class="label" for="total">Total Biaya (Rp.)</label>
                 <div class="control-input">
-                    <p class="control-static" id="total-s"><?php echo ($data and $data->total) ? formatAngka($data->total) : '-'; ?></p>
+                    <p class="control-static" id="total-s"><?php echo ($data and $data->total) ? format_number($data->total) : '-'; ?></p>
                     <input type="hidden" id="total" name="total" value="<?php echo ($data and $data->total) ? $data->total : ''; ?>">
                 </div>
             </div>
@@ -223,7 +223,7 @@
                         <p class="control-static">Menunggu konfirmasi dari admin</p>
                     <?php endif;?>
                     <input type="hidden" name="pembayaran" value="<?php echo $data->pembayaran; ?>">
-                    <img src="<?php echo siteUrl('asset/uploads/' . $data->pembayaran); ?>" alt="Gambar" class="thumb">
+                    <img src="<?php echo site_url('asset/uploads/' . $data->pembayaran); ?>" alt="Gambar" class="thumb">
                 <?php elseif (!$data or ($data and !$data->pembayaran)): ?>
                     <p class="control-static">Belum ada bukti pembayaran <?php echo ($data and $data->status) ? 'tapi sudah lunas' : ''; ?></p>
                     <input type="file" name="pembayaran">
@@ -278,4 +278,4 @@
     </form>
 </div>
 
-<script src="<?php echo siteUrl('modules/shop/script.js'); ?>"></script>
+<script src="<?php echo site_url('modules/shop/script.js'); ?>"></script>

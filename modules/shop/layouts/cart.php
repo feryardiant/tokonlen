@@ -4,14 +4,14 @@
     <?php if (count($items) > 0 and $data): $belanja = 0; ?>
     <?php foreach ($data->fetch() as $row): ?>
         <div class="item clearfix">
-            <img src="<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>" width="150" height="150" alt="<?php echo $row->nama ?>">
+            <img src="<?php echo site_url('asset/uploads/'.$row->gambar) ?>" width="150" height="150" alt="<?php echo $row->nama ?>">
             <div class="detail">
                 <?php $harga = $row->diskon ?: $row->harga ?>
-                <?php $diskon = $row->diskon ? ' (diskon dari: <del>'.formatAngka($row->harga).'</del>)': '' ?>
+                <?php $diskon = $row->diskon ? ' (diskon dari: <del>'.format_number($row->harga).'</del>)': '' ?>
                 <h4><?php echo anchor('shop/product/'.$row->id_produk, $row->nama) ?></h4>
-                <span><?php echo $items[$row->id_produk].' &times; @ Rp. '.formatAngka($harga).$diskon ?></span>
+                <span><?php echo $items[$row->id_produk].' &times; @ Rp. '.format_number($harga).$diskon ?></span>
                 <?php $subtotal = $items[$row->id_produk] * $harga; $belanja += $subtotal; ?>
-                <span class="fright bold"><?php echo 'Subtotal: Rp. '.formatAngka($subtotal) ?></span>
+                <span class="fright bold"><?php echo 'Subtotal: Rp. '.format_number($subtotal) ?></span>
                 <input type="hidden" name="weight" value="<?php echo $row->berat ?>">
                 <nav class="page-toolbar cart-action">
                     <?php echo anchor('cart/?id='.$row->id_produk.'&do=clear', 'Hapus', ['class' => 'btn toolbar-btn']) ?>
@@ -25,9 +25,9 @@
             </div>
         </div>
     <?php endforeach; ?>
-        <form action="<?php echo siteUrl('shop/checkout/') ?>" method="post" class="form">
+        <form action="<?php echo site_url('shop/checkout/') ?>" method="post" class="form">
             <input type="hidden" name="belanja" value="<?php echo $belanja ?>">
-            <h4 class="total-text"><?php echo 'Total: Rp. '.formatAngka($belanja) ?></h4>
+            <h4 class="total-text"><?php echo 'Total: Rp. '.format_number($belanja) ?></h4>
 
             <fieldset>
                 <legend>Simulasi Ongkir</legend>
@@ -86,4 +86,4 @@
     </div>
 </div>
 
-<script src="<?php echo siteUrl('modules/shop/script.js') ?>"></script>
+<script src="<?php echo site_url('modules/shop/script.js') ?>"></script>

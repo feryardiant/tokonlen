@@ -8,8 +8,8 @@
     <table class="data">
         <thead>
             <tr>
-                <th><?php echo sortBy('id_order', 'ID') ?></th>
-                <th><?php echo sortBy('nama_lengkap', 'Pelanggan') ?></th>
+                <th><?php echo sort_by('id_order', 'ID') ?></th>
+                <th><?php echo sort_by('nama_lengkap', 'Pelanggan') ?></th>
                 <th>Tanggal</th>
                 <th>Status</th>
                 <th>Total Harga (Rp.)</th>
@@ -21,9 +21,9 @@
             <tr id="data-<?php echo $row->id_order ?>">
                 <td class="acenter"><?php echo $row->id_order ?></td>
                 <td><?php echo $row->nama_lengkap ?></td>
-                <td class="acenter"><?php echo formatTanggal($row->tanggal) ?></td>
+                <td class="acenter"><?php echo format_date($row->tanggal) ?></td>
                 <td class="acenter"><?php echo Order::status($row->status) ?></td>
-                <td class="aright"><?php echo formatAngka($row->total) ?></td>
+                <td class="aright"><?php echo format_number($row->total) ?></td>
                 <td class="action"><div class="btn-group">
                     <?php echo anchor('admin-shop/orders/form/'.$row->id_order, 'Lihat', ['class' => 'btn btn-edit']) ?>
                     <?php echo anchor('admin-shop/orders/delete/'.$row->id_order, 'Hapus', ['class' => 'btn btn-hapus', 'data-confirm-text' => 'Apakah anda yakin ingin menghapus data ini?']) ?>

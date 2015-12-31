@@ -50,12 +50,33 @@ function conf($key = null, $value = null) {
  * @param   string  Permalink
  * @return  string
  */
-function siteUrl($permalink = '') {
+function site_url($permalink = '') {
     if (in_array(substr($permalink, 0, 1), ['#', '?'])) {
         $permalink = app('uri')->path().$permalink;
     }
 
     return conf('baseurl').$permalink ;
+}
+
+/**
+ * Digunakan untuk mendapatkan URL saat ini
+ *
+ * @param   string  $permalink  URL tambahan bila perlu
+ * @return  string
+ */
+function current_url($permalink = '', $trim = false) {
+    $req = !empty($_GET) ? '?'.http_build_query($_GET) : '';
+    $url = site_url(app('uri')->path().$req);
+
+    if ($permalink) {
+        $permalink = '/'.$permalink;
+    }
+
+    if ($trim === true) {
+        $url = rtrim($url, '/');
+    }
+
+    return $url.$permalink;
 }
 
 /**
@@ -66,7 +87,7 @@ function siteUrl($permalink = '') {
  */
 function redirect($url = '', $delay = false) {
     if (PHP_SAPI != 'cli') {
-        $url = strpos('?', $url) === 1 ? currentUrl($url) : siteUrl($url);
+        $url = strpos('?', $url) === 1 ? current_url($url) : site_url($url);
 
         if ($delay !== false) {
             header("refresh: {$delay}; url={$url}");
@@ -79,27 +100,6 @@ function redirect($url = '', $delay = false) {
     }
 
     return false;
-}
-
-/**
- * Digunakan untuk mendapatkan URL saat ini
- *
- * @param   string  $permalink  URL tambahan bila perlu
- * @return  string
- */
-function currentUrl($permalink = '', $trim = false) {
-    $req = !empty($_GET) ? '?'.http_build_query($_GET) : '';
-    $url = siteUrl(app('uri')->path().$req);
-
-    if ($permalink) {
-        $permalink = '/'.$permalink;
-    }
-
-    if ($trim === true) {
-        $url = rtrim($url, '/');
-    }
-
-    return $url.$permalink;
 }
 
 /**
@@ -142,9 +142,8 @@ function post($key, $escape = true) {
     if (isset($_POST[$key])) {
         if (!is_array($_POST[$key]) and $escape === true) {
             return escape($_POST[$key]);
-        } else {
-            return $_POST[$key];
         }
+        return $_POST[$key];
     }
     return;
 }
@@ -159,7 +158,7 @@ function post($key, $escape = true) {
  * @param  string  $type      Type alert
  * @param  mixed   $messages  Isi alert
  */
-function setAlert($type, $messages) {
+function set_alert($type, $messages) {
     // Jika tipe tidak terdaftar, maka $type = 'notice'
     if (!in_array($type, ['warning', 'error', 'notice', 'success'])) {
         $type = 'notice';
@@ -181,7 +180,7 @@ function setAlert($type, $messages) {
  *
  * @return  string
  */
-function showAlert() {
+function show_alert() {
     $out = '';
     $alerts = unserialize(session('flash'));
 

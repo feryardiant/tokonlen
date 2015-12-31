@@ -1,7 +1,7 @@
 <?php defined('ROOT') or die ('Not allowed!'); require __DIR__.'/sidebar.php'; ?>
 <div id="main-contents">
     <div class="product-single clearfix">
-        <img src="<?php echo siteUrl('asset/uploads/'.$data->gambar) ?>" alt="<?php echo $data->nama ?>">
+        <img src="<?php echo site_url('asset/uploads/'.$data->gambar) ?>" alt="<?php echo $data->nama ?>">
         <div class="detail">
             <p><?php echo $data->keterangan ?></p>
             <div class="meta">
@@ -9,7 +9,7 @@
                     <dt>Stok</dt>
                     <dd><?php echo $data->stok ?: 'Maaf stok habis' ?></dd>
                     <dt>Berat</dt>
-                    <dd><?php echo formatAngka($data->berat, false).' Gram' ?></dd>
+                    <dd><?php echo format_number($data->berat, false).' Gram' ?></dd>
                 </dl>
             </div>
             <hr>

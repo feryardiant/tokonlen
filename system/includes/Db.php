@@ -2,8 +2,14 @@
 
 class Db
 {
+    /**
+     * @var mysqli
+     */
     private $_db;
 
+    /**
+     * @var mysqli_result
+     */
     private $_results;
 
     private $_sql;
@@ -60,7 +66,7 @@ class Db
                 $this->_db->set_charset('utf8');
             }
         } catch (RuntimeException $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
     }
@@ -108,7 +114,7 @@ class Db
                 App::error($this->_db->error.'<br>'.$this->_sql);
             }
         } catch (Exception $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
     }
@@ -235,7 +241,7 @@ class Db
         try {
             return $this->query($sql, $column, $table, $where);;
         } catch (Exception $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
     }
@@ -276,7 +282,7 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
     }
@@ -303,28 +309,9 @@ class Db
 
             return false;
         } catch (Exception $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
-    }
-
-    /**
-     * Menambah atau memperbarui record
-     *
-     * @param   string  $table  Nama Table
-     * @param   array   $data   Data yang akan ditambahkan atau diperarui
-     * @param   array   $term   Identifikasi field, gunakan hanya untuk pembaruian
-     * @return  bool
-     */
-    public function save($table, array $data = [], array $term = [])
-    {
-        if (!empty($term)) {
-            $return = $this->update($table, $data, $term);
-        } else {
-            $return = $this->insert($table, $data);
-        }
-
-        return $return;
     }
 
     /**
@@ -341,7 +328,7 @@ class Db
         try {
             return $this->query("DELETE FROM `%s` %s", $table, $wheres);
         } catch (Exception $e) {
-            setAlert('error', $e->getMessage());
+            set_alert('error', $e->getMessage());
             return false;
         }
     }
@@ -492,5 +479,3 @@ class Db
         }
     }
 }
-
-// EOF db.php

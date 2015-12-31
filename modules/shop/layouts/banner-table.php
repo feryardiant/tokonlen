@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Gambar</th>
-                <th><?php echo sortBy('judul', 'Judul') ?></th>
+                <th><?php echo sort_by('judul', 'Judul') ?></th>
                 <th>Penayangan</th>
                 <th>Aktif</th>
                 <th>Tipe</th>
@@ -17,9 +17,9 @@
         <tbody>
         <?php if (($total = $data->count()) > 0) : foreach ($data->fetch() as $row) : ?>
             <tr id="data-<?php echo $row->id_banner ?>">
-                <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>);"></span></td>
+                <td><span class="thumb" style="background-image: url(<?php echo site_url('asset/uploads/'.$row->gambar) ?>);"></span></td>
                 <td><?php echo '<strong>'.$row->judul.'</strong><br>'.$row->keterangan ?></td>
-                <td class="acenter"><?php echo formatTanggal($row->tgl_mulai).' - '.formatTanggal($row->tgl_akhir) ?></td>
+                <td class="acenter"><?php echo format_date($row->tgl_mulai).' - '.format_date($row->tgl_akhir) ?></td>
                 <td class="acenter"><?php echo $row->aktif == 1 ? 'Ya' : 'Tidak' ?></td>
                 <td class="acenter"><?php echo $row->tipe ?></td>
                 <td class="action"><div class="btn-group">

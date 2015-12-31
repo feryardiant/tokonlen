@@ -2,7 +2,7 @@
 <div id="main-sidebar" class="fright">
     <div class="widget">
         <h4 class="widget-title">Pencarian</h4>
-        <form action="<?php echo siteUrl('shop') ?>" method="get" id="product-search">
+        <form action="<?php echo site_url('shop') ?>" method="get" id="product-search">
             <input type="search" name="search" id="search">
             <input type="submit" id="s-btn" class="btn" value="Cari">
         </form>

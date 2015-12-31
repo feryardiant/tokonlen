@@ -1,7 +1,7 @@
 <?php defined('ROOT') or die ('Not allowed!') ?>
 <?php require __DIR__.'/sidebar.php' ?>
 <div id="main-contents">
-    <form action="<?php echo currentUrl() ?>" id="user-form" method="post" class="form">
+    <form action="<?php echo current_url() ?>" id="user-form" method="post" class="form">
         <div class="control-group">
             <label class="label" for="username">Username</label>
             <div class="control-input">

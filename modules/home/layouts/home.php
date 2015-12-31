@@ -4,7 +4,7 @@
     <div class="slider">
     <?php foreach ($slides as $slide): ?>
         <div class="slide">
-            <img src="<?php echo siteUrl('asset/uploads/'.$slide->gambar) ?>" style="width: 100%; height: 100%;" alt="<?php echo $slide->judul ?>">
+            <img src="<?php echo site_url('asset/uploads/'.$slide->gambar) ?>" style="width: 100%; height: 100%;" alt="<?php echo $slide->judul ?>">
             <span class="slide-text"><?php echo $slide->judul ?></span>
         </div>
     <?php endforeach ?>
@@ -17,7 +17,7 @@
     <div class="product-list clearfix">
     <?php foreach ($products as $product): ?>
         <div class="product-item" style="width: 170px">
-            <img src="<?php echo siteUrl('asset/uploads/'.$product->gambar) ?>" style="width: 100%" alt="<?php echo $product->nama ?>">
+            <img src="<?php echo site_url('asset/uploads/'.$product->gambar) ?>" style="width: 100%" alt="<?php echo $product->nama ?>">
             <?php echo anchor('shop/product/'.$product->id_produk, $product->nama) ?>
             <?php echo shopHarga($product->harga, $product->diskon) ?>
         </div>

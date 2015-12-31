@@ -10,7 +10,7 @@
  * @param   array  $array  Array parameter
  * @return  bool
  */
-function isArrayAssoc(array $array) {
+function array_is_assocc(array $array) {
     $array = array_keys($array);
     $array = array_filter($array, 'is_string');
 
@@ -24,7 +24,7 @@ function isArrayAssoc(array $array) {
  * @param   array   $default  Nilai Default
  * @return  array
  */
-function arraySetDefaults(array $array, array $default) {
+function array_set_defaults(array $array, array $default) {
     foreach ($default as $key => $val) {
         if (!isset($array[$key])) {
             $array[$key] = $val;
@@ -41,7 +41,7 @@ function arraySetDefaults(array $array, array $default) {
  * @param   array   $default  Nilai Default
  * @return  array
  */
-function arraySetValues(array $array, array $default) {
+function array_set_value(array $array, array $default) {
     foreach ($array as $key => $value) {
         $array[$key] = isset($default[$key]) ? $default[$key] : $value;
     }
@@ -53,7 +53,7 @@ function arraySetValues(array $array, array $default) {
  * Data order
  * -------------------------------------------------------------------------- */
 
-function sortBy($field, $label) {
+function sort_by($field, $label) {
     $uri = app('uri');
 
     // Mendapatkan nilai untuk ordering data
@@ -130,7 +130,7 @@ function escape($char) {
  * @param   string  $bts_rbn  Tausans number separator
  * @return  string
  */
-function formatAngka($number, $desimal = '', $bts_des = '', $bts_rbn = '') {
+function format_number($number, $desimal = '', $bts_des = '', $bts_rbn = '') {
     $bts_des || $bts_des = ',';
     $bts_rbn || $bts_rbn = '.';
 
@@ -152,7 +152,7 @@ function formatAngka($number, $desimal = '', $bts_des = '', $bts_rbn = '') {
  * @param   string  $format  Date Format (leave it empty to use default config)
  * @return  string
  */
-function formatTanggal($string, $format = '') {
+function format_date($string, $format = '') {
     $format || $format = conf('fmtdate');
 
     return date($format, strtotime($string));
@@ -167,7 +167,7 @@ function formatTanggal($string, $format = '') {
  *
  * @return  array
  */
-function getBulan() {
+function get_months_array() {
     $output = [];
 
     for ( $i = 1; $i <= 12; $i++) {
@@ -184,7 +184,7 @@ function getBulan() {
  * @param   int    $interfal  Selisih tahun
  * @return  array
  */
-function getTahun($interfal = 10) {
+function get_years_array($interfal = 10) {
     $output = [];
 
     for ( $i = 0; $i <= $interfal; $i++) {

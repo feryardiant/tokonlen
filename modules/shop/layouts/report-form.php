@@ -1,6 +1,6 @@
 <?php defined('ROOT') or die ('Not allowed!'); require ADMIN_SIDEBAR; ?>
 <div id="main-contents">
-    <form action="<?php echo currentUrl() ?>" id="report-form" method="post" class="form" enctype="multipart/form-data">
+    <form action="<?php echo current_url() ?>" id="report-form" method="post" class="form" enctype="multipart/form-data">
 
         <div class="control-group only-screen">
             <label class="label" for="status">Status Pembayaran</label>
@@ -72,17 +72,17 @@
                 <?php foreach ($data as $row): $id = $isSelling ? 'id_produk' : 'id_order'; ?>
                     <tr id="data-<?php echo $row->$id ?>">
                     <?php if ($isSelling): ?>
-                        <td><span class="thumb" style="background-image: url(<?php echo siteUrl('asset/uploads/'.$row->gambar) ?>);"></span></td>
+                        <td><span class="thumb" style="background-image: url(<?php echo site_url('asset/uploads/'.$row->gambar) ?>);"></span></td>
                         <td><?php echo $row->nama ?></td>
                         <td class="acenter"><?php echo $row->penjualan ?></td>
-                        <td class="aright"><?php echo formatAngka($row->harga) ?></td>
-                        <td class="aright"><?php echo formatAngka($row->diskon) ?></td>
+                        <td class="aright"><?php echo format_number($row->harga) ?></td>
+                        <td class="aright"><?php echo format_number($row->diskon) ?></td>
                     <?php else: ?>
                         <td class="acenter"><?php echo $row->id_order ?></td>
                         <td><?php echo $row->nama_lengkap ?></td>
-                        <td class="acenter"><?php echo formatTanggal($row->tanggal) ?></td>
+                        <td class="acenter"><?php echo format_date($row->tanggal) ?></td>
                         <td class="acenter"><?php echo Order::status($row->status) ?></td>
-                        <td class="aright"><?php echo formatAngka($row->belanja) ?></td>
+                        <td class="aright"><?php echo format_number($row->belanja) ?></td>
                     <?php endif ?>
                     </tr>
                 <?php endforeach ?>
@@ -100,4 +100,4 @@
     </form>
 </div>
 
-<script src="<?php echo siteUrl('modules/shop/script.js') ?>"></script>
+<script src="<?php echo site_url('modules/shop/script.js') ?>"></script>

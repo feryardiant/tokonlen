@@ -46,15 +46,15 @@ class Admin extends Module
 
                     if (Page::save($data, $id)) {
                         if ($id) {
-                            setAlert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil diperbarui');
+                            set_alert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil diperbarui');
                         } else {
-                            setAlert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil dibuat');
+                            set_alert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil dibuat');
                         }
 
                         return redirect('admin/pages');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan halaman <b>'.$data['judul'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan halaman <b>'.$data['judul'].'</b>');
                     return redirect($this->uri->path());
                 }
 
@@ -67,9 +67,9 @@ class Admin extends Module
 
             case 'delete':
                 if (Page::del([Page::primary() => $id])) {
-                    setAlert('success', 'Halaman berhasil terhapus');
+                    set_alert('success', 'Halaman berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan halaman');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan halaman');
                 }
 
                 return redirect('admin/pages');
@@ -105,15 +105,15 @@ class Admin extends Module
 
                     if (User::save($data, $id)) {
                         if ($id) {
-                            setAlert('success', 'Berhasil memperbarui data pengguna <b>'.$data['username'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data pengguna <b>'.$data['username'].'</b>');
                         } else {
-                            setAlert('success', 'Berhasil menambahkan <b>'.$data['username'].'</b> sebagai pengguna');
+                            set_alert('success', 'Berhasil menambahkan <b>'.$data['username'].'</b> sebagai pengguna');
                         }
 
                         return redirect('admin/users');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan pengguna <b>'.$data['username'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan pengguna <b>'.$data['username'].'</b>');
                     return redirect($this->uri->path());
                 }
 
@@ -126,9 +126,9 @@ class Admin extends Module
 
             case 'delete':
                 if (User::del([User::primary() => $id])) {
-                    setAlert('success', 'Pengguna berhasil terhapus');
+                    set_alert('success', 'Pengguna berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan pengguna');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan pengguna');
                 }
 
                 return redirect('admin/users');

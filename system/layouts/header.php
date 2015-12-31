@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <!-- FAVICON -->
-    <link href="<?php echo siteUrl('asset/favicon.png') ?>" rel="shortcut icon">
+    <link href="<?php echo site_url('asset/favicon.png') ?>" rel="shortcut icon">
     <!-- END FAVICON -->
     <!-- CSS -->
-    <link href="<?php echo siteUrl('asset/lib/jquery-ui.css') ?>" rel="stylesheet">
-    <link href="<?php echo siteUrl('asset/style.css') ?>" rel="stylesheet">
+    <link href="<?php echo site_url('asset/lib/jquery-ui.css') ?>" rel="stylesheet">
+    <link href="<?php echo site_url('asset/style.css') ?>" rel="stylesheet">
     <!-- END CSS -->
     <!-- JS -->
-    <script src="<?php echo siteUrl('asset/lib/jquery.min.js') ?>"></script>
-    <script src="<?php echo siteUrl('asset/lib/jquery-ui.min.js') ?>"></script>
-    <script src="<?php echo siteUrl('asset/lib/jquery-validate.min.js') ?>"></script>
-    <script src="<?php echo siteUrl('asset/lib/nicedit.js') ?>"></script>
-    <script src="<?php echo siteUrl('asset/script.js') ?>"></script>
+    <script src="<?php echo site_url('asset/lib/jquery.min.js') ?>"></script>
+    <script src="<?php echo site_url('asset/lib/jquery-ui.min.js') ?>"></script>
+    <script src="<?php echo site_url('asset/lib/jquery-validate.min.js') ?>"></script>
+    <script src="<?php echo site_url('asset/lib/nicedit.js') ?>"></script>
+    <script src="<?php echo site_url('asset/script.js') ?>"></script>
     <!-- END JS -->
 </head>
-<body <?php bodyAttrs()?> data-siteurl="<?php echo siteUrl() ?>">
+<body <?php bodyAttrs()?> data-siteurl="<?php echo site_url() ?>">
     <div class="wrapper sticky-wrap">
         <div class="sticky-head">
             <header id="site-header" class="only-screen">
@@ -39,4 +39,4 @@
                     <?php if (isset($toolbar)) echo '<nav id="page-tool" class="clearfix">'.$toolbar->nav('menu menu-h menu-tool').'</nav>' ?>
                 </header>
                 <div id="content-main" class="clearfix">
-                    <?php echo showAlert() ?>
+                    <?php echo show_alert() ?>

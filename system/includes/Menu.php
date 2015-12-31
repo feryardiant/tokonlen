@@ -58,7 +58,7 @@ class Menu
                 if (is_string($label)) {
                     $out .= '<li'.$class.'>'.anchor($link, $label).'</li>';
                 } else {
-                    $attrs = arraySetDefaults($label, [
+                    $attrs = array_set_defaults($label, [
                         'label' => '',
                         'subs'  => [],
                     ]);

@@ -26,7 +26,7 @@ class AdminShop extends Module
                     ];
 
                     if ($tanggal = post('tanggal')) {
-                        $order['tanggal'] = formatTanggal($tanggal, 'Y-m-d');
+                        $order['tanggal'] = format_date($tanggal, 'Y-m-d');
                     } else {
                         $order['tanggal'] = date('Y-m-d');
                     }
@@ -35,7 +35,7 @@ class AdminShop extends Module
                         $upload = new Upload('pembayaran');
                         $order['pembayaran'] = $upload->doUpload();
                     } catch (Exception $e) {
-                        setAlert('error', $e->getMessage());
+                        set_alert('error', $e->getMessage());
                     }
 
                     if ($id_pelanggan = post($customerKey)) {
@@ -109,15 +109,15 @@ class AdminShop extends Module
 
                     if (Order::save($order, $id)) {
                         if ($id) {
-                            setAlert('success', 'Berhasil memperbarui data order <b>'.$order['nama'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data order <b>'.$order['nama'].'</b>');
                         } else {
-                            setAlert('success', 'Berhasil menambahkan order <b>'.$order['nama'].'</b>');
+                            set_alert('success', 'Berhasil menambahkan order <b>'.$order['nama'].'</b>');
                         }
 
                         return redirect('admin-shop/orders');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan order');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan order');
                     return redirect($this->uri->path());
                 }
 
@@ -137,9 +137,9 @@ class AdminShop extends Module
 
             case 'delete':
                 if (Order::del([Order::primary() => $id])) {
-                    setAlert('success', 'Order berhasil terhapus');
+                    set_alert('success', 'Order berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan order');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan order');
                 }
 
                 return redirect('admin-shop/orders');
@@ -304,15 +304,15 @@ class AdminShop extends Module
 
                         if (Customer::save($pelanggan, $id)) {
                             if ($id) {
-                                setAlert('success', 'Berhasil memperbarui data pelanggan <b>'.$pelanggan['nama'].'</b>');
+                                set_alert('success', 'Berhasil memperbarui data pelanggan <b>'.$pelanggan['nama'].'</b>');
                             } else {
-                                setAlert('success', 'Berhasil menambahkan pelanggan <b>'.$pelanggan['nama'].'</b>');
+                                set_alert('success', 'Berhasil menambahkan pelanggan <b>'.$pelanggan['nama'].'</b>');
                             }
                         } else {
-                            setAlert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
+                            set_alert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
                         }
                     } else {
-                        setAlert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
+                        set_alert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
                     }
 
                     return redirect('admin-shop/customers');
@@ -327,9 +327,9 @@ class AdminShop extends Module
 
             case 'delete':
                 if (Customer::del($id)) {
-                    setAlert('success', 'Pelanggan berhasil terhapus');
+                    set_alert('success', 'Pelanggan berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan pelanggan');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan pelanggan');
                 }
 
                 return redirect('admin-shop/customers');
@@ -356,7 +356,7 @@ class AdminShop extends Module
                         'id_kategori' => post('kategori'),
                         'nama'        => post('nama'),
                         'gambar'      => post('gambar'),
-                        'tgl_masuk'   => formatTanggal(post('tgl_masuk'), 'Y-m-d'),
+                        'tgl_masuk'   => format_date(post('tgl_masuk'), 'Y-m-d'),
                         'stok'        => post('stok'),
                         'harga'       => post('harga'),
                         'berat'       => post('berat'),
@@ -368,21 +368,21 @@ class AdminShop extends Module
                         $upload = new Upload('gambar');
                         $data['gambar'] = $upload->doUpload();
                     } catch (Exception $e) {
-                        setAlert('error', $e->getMessage());
+                        set_alert('error', $e->getMessage());
                         return redirect($this->uri->path());
                     }
 
                     if (Product::save($data, $id)) {
                         if ($id) {
-                            setAlert('success', 'Berhasil memperbarui data produk <b>'.$data['nama'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data produk <b>'.$data['nama'].'</b>');
                         } else {
-                            setAlert('success', 'Berhasil menambahkan produk <b>'.$data['nama'].'</b>');
+                            set_alert('success', 'Berhasil menambahkan produk <b>'.$data['nama'].'</b>');
                         }
 
                         return redirect('admin-shop/products');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan produk <b>'.$data['nama'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan produk <b>'.$data['nama'].'</b>');
                     return redirect($this->uri->path());
                 }
 
@@ -395,9 +395,9 @@ class AdminShop extends Module
 
             case 'delete':
                 if (Product::del($id)) {
-                    setAlert('success', 'Produk berhasil terhapus');
+                    set_alert('success', 'Produk berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan produk');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan produk');
                 }
 
                 return redirect('admin-shop/products');
@@ -425,8 +425,8 @@ class AdminShop extends Module
                         'keterangan'  => post('keterangan'),
                         'url'         => post('url'),
                         'gambar'      => post('gambar'),
-                        'tgl_mulai'   => formatTanggal(post('tgl_mulai'), 'Y-m-d'),
-                        'tgl_akhir'   => formatTanggal(post('tgl_akhir'), 'Y-m-d'),
+                        'tgl_mulai'   => format_date(post('tgl_mulai'), 'Y-m-d'),
+                        'tgl_akhir'   => format_date(post('tgl_akhir'), 'Y-m-d'),
                         'aktif'       => post('aktif'),
                         'tipe'        => post('tipe'),
                     ];
@@ -435,20 +435,20 @@ class AdminShop extends Module
                         $upload = new Upload('gambar');
                         $data['gambar'] = $upload->doUpload();
                     } catch (Exception $e) {
-                        setAlert('error', $e->getMessage());
+                        set_alert('error', $e->getMessage());
                     }
 
                     if (Banner::save($data, $id)) {
                         if ($id) {
-                            setAlert('success', 'Berhasil memperbarui data banner <b>'.$data['judul'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data banner <b>'.$data['judul'].'</b>');
                         } else {
-                            setAlert('success', 'Berhasil menambahkan banner <b>'.$data['judul'].'</b>');
+                            set_alert('success', 'Berhasil menambahkan banner <b>'.$data['judul'].'</b>');
                         }
 
                         return redirect('admin-shop/banners');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan banner <b>'.$data['judul'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan banner <b>'.$data['judul'].'</b>');
                     return redirect($this->uri->path());
                 } else {
                     if ($id) {
@@ -461,9 +461,9 @@ class AdminShop extends Module
 
             case 'delete':
                 if (Banner::del([Banner::primary() => $id])) {
-                    setAlert('success', 'Banner berhasil terhapus');
+                    set_alert('success', 'Banner berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan banner');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan banner');
                 }
 
                 return redirect('admin-shop/banners');
@@ -492,15 +492,15 @@ class AdminShop extends Module
 
                     if (Category::save($data, $id)) {
                         if ($id) {
-                            setAlert('success', 'Berhasil memperbarui data kategori <b>'.$data['nama'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data kategori <b>'.$data['nama'].'</b>');
                         } else {
-                            setAlert('success', 'Berhasil menambahkan kategori <b>'.$data['nama'].'</b>');
+                            set_alert('success', 'Berhasil menambahkan kategori <b>'.$data['nama'].'</b>');
                         }
 
                         return redirect('admin-shop/categories');
                     }
 
-                    setAlert('error', 'Terjadi kesalahan dalam penyimpanan kategori <b>'.$data['nama'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan kategori <b>'.$data['nama'].'</b>');
                     return redirect($this->uri->path());
                 } else {
                     if ($id) {
@@ -513,9 +513,9 @@ class AdminShop extends Module
 
             case 'delete':
                 if (Category::del([Category::primary() => $id])) {
-                    setAlert('success', 'Kategori berhasil terhapus');
+                    set_alert('success', 'Kategori berhasil terhapus');
                 } else {
-                    setAlert('error', 'Terjadi kesalahan dalam penghapusan kategori');
+                    set_alert('error', 'Terjadi kesalahan dalam penghapusan kategori');
                 }
 
                 return redirect('admin-shop/categories');

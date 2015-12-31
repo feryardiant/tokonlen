@@ -52,7 +52,7 @@ class Home extends Module
                 session($login);
                 redirect('admin-shop/orders');
             } else {
-                setAlert('error', 'Login gagal');
+                set_alert('error', 'Login gagal');
             }
         }
 
@@ -86,10 +86,10 @@ class Home extends Module
                 $pelanggan['id_pengguna'] = $userId;
 
                 if (Customer::add($pelanggan)) {
-                    setAlert('success', 'Registrasi berhasil, silahkan login ke akun yang baru saja anda buat');
+                    set_alert('success', 'Registrasi berhasil, silahkan login ke akun yang baru saja anda buat');
                     redirect('login');
                 } else {
-                    setAlert('error', 'Maaf registrasi gagal');
+                    set_alert('error', 'Maaf registrasi gagal');
                     redirect('register');
                 }
             }
@@ -103,7 +103,7 @@ class Home extends Module
     public function logout()
     {
         session(['auth' => 0, 'id' => '', 'username' => '', 'level' => '']);
-        clearSession(['auth', 'id', 'username', 'level']);
+        session_clear(['auth', 'id', 'username', 'level']);
         redirect('');
     }
 }
