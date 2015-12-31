@@ -12,7 +12,7 @@ class Admin extends Module
     /**
      * {inheritdoc}
      */
-    public static function initialize(App $app = null)
+    public static function initialize(App $app = null, Config $config = null)
     {
         defined('ADMIN_SIDEBAR') or define('ADMIN_SIDEBAR', __DIR__.'/layouts/sidebar.php');
     }

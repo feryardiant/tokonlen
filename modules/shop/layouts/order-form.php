@@ -277,5 +277,3 @@
     <?php endif;?>
     </form>
 </div>
-
-<script src="<?php echo site_url('modules/shop/script.js'); ?>"></script>

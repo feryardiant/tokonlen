@@ -45,23 +45,6 @@ $(function () {
     }
   })
 
-  // Home Slider
-  var $slider = $('.slider')
-    , left  = 0, width = 930
-    , total = width * $('.slide').size()
-
-  $slider.css({ width: total, height: 300 })
-
-  setInterval(function () {
-    if (left >= -(total - (width * 2))) {
-      left = left - width
-    } else {
-      left = 0
-    }
-
-    $slider.css('margin-left', left)
-  }, 5000)
-
   // Jquery UI Tab Trigger
   $('.jqui-tabs').hide()
   $(document).ready(function () {
@@ -76,9 +59,9 @@ $(function () {
     var self = $(this)
 
     if (typeof self.attr('data-url') !== 'undefined') {
-    var remoteSrc = self.data('url')
-      , field = self.data('field')
-      , resData = {}
+      var remoteSrc = self.data('url')
+        , field = self.data('field')
+        , resData = {}
 
       self.autocomplete({
         minLength: 2,
@@ -114,25 +97,27 @@ $(function () {
 
           if (selfId == 'nama_lengkap') {
             var kota = data.kota.replace(/\s+/g, '-').replace(/\(|\)+/g, '').toLowerCase()
+              , $dest = $('[name="destination"]')
 
             $('[name="id_pelanggan"]').val(data.id_pelanggan)
             $('[name="nama_lengkap"]').val(data.nama_lengkap).attr('disabled', true)
             $('[name="alamat"]').html(data.alamat).attr('disabled', true).attr('tabindex', '-1')
             $('[name="kota"]').val(data.kota).attr('disabled', true)
-            $('[name="destination"]').attr('disabled', true).attr('tabindex', '-1')
-            $('[name="destination"]').find('option#dest-'+kota).attr('selected', '')
+            $dest.attr('disabled', true).attr('tabindex', '-1')
+            $dest.find('option#dest-'+kota).attr('selected', '')
             $('[name="telp"]').val(data.telp).attr('disabled', true).attr('tabindex', '-1')
             $('#fieldset-akun').attr('disabled', true).addClass('hidden')
             $('#produk').focus()
           } else if (selfId == 'produk') {
             var idProduct = data.id_produk
               , discount = +data.diskon
+              , $tblProduct = $('#tbl-produk')
 
-            $('#tbl-produk').find('tr.empty').remove()
-            $('#tbl-produk').append([
+            $tblProduct.find('tr.empty').remove()
+            $tblProduct.append([
               '<tr id="produk-row-'+idProduct+'" data-id="'+idProduct+'">',
                 '<td>'+
-                  '<span class="thumb" style="background-image: url('+$('body').data('siteurl')+'asset/uploads/'+data.gambar+');"></span>'+
+                  '<span class="thumb" style="background-image: url('+siteUrl('asset/uploads/'+data.gambar)+');"></span>'+
                   '<input type="hidden" name="produk_id[]" value="'+idProduct+'">'+
                   '<input type="hidden" name="produk_weight[]" value="'+data.berat+'" id="berat-'+idProduct+'">'+
                 '</td>',

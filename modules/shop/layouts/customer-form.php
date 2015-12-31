@@ -49,8 +49,8 @@
             <div class="control-group">
                 <label class="label" for="password">Password</label>
                 <div class="control-input">
-                    <input type="password" required name="password" id="password" class="small">
-                    <input type="password" required name="passconf" id="passconf" class="small">
+                    <input type="password" name="password" id="password" class="small">
+                    <input type="password" name="passconf" id="passconf" class="small">
                 </div>
             </div>
         </fieldset>

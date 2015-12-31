@@ -55,6 +55,20 @@ class App
             return new Uri;
         });
 
+        $this->conf('asset.css', [
+            'asset/lib/jquery-ui.css',
+            'asset/reset.css',
+            'asset/style.css',
+        ]);
+
+        $this->conf('asset.js', [
+            'asset/lib/jquery.min.js',
+            'asset/lib/jquery-ui.min.js',
+            'asset/lib/jquery-validate.min.js',
+            'asset/lib/nicedit.js',
+            'asset/script.js',
+        ]);
+
         // Inisiasi modules container
         $this->add('modules', function ($c, $name) {
             $modules = new Modules($name);
@@ -210,9 +224,29 @@ class App
             foreach ($module->all() as $mod) {
                 $init = ucfirst($mod).'::initialize';
                 if (is_callable($init)) {
-                    call_user_func($init, $this);
+                    call_user_func($init, $this, $this->conf);
                 }
             }
+
+            $this->add('asset.css', function ($c, $name) {
+                $out = [];
+
+                foreach ($c->get($name) as $css) {
+                    $out[] = '<link href="'.site_url($css).'" rel="stylesheet">';
+                }
+
+                return implode(PHP_EOL, $out);
+            });
+
+            $this->add('asset.js', function ($c, $name) {
+                $out = [];
+
+                foreach ($c->get($name) as $js) {
+                    $out[] = '<script src="'.site_url($js).'"></script>';
+                }
+
+                return implode(PHP_EOL, $out);
+            });
 
             $routes = $this->get('routes');
             $path = $uri->path() ?: $this->conf('basemod');
@@ -227,6 +261,7 @@ class App
             if (is_array($response) or is_object($response)) {
                 $response = json_encode($response);
             }
+
             echo $response;
 
             if (session('flash')) {

@@ -315,7 +315,9 @@ class AdminShop extends Module
                         set_alert('notice', 'Data yang anda masukan masih sama, tidak ada update data');
                     }
 
-                    return redirect('admin-shop/customers');
+                    $link = $id == User::current('id_pelanggan') ? 'admin-shop/account' : 'admin-shop/customers';
+
+                    return redirect($link);
                 }
 
                 if ($id) {

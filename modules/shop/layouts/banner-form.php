@@ -11,7 +11,7 @@
         <div class="control-group">
             <label class="label" for="tipe">Tipe</label>
             <div class="control-input">
-                <select name="tipe" required>
+                <select id="tipe" name="tipe" required>
                     <option value="">Pilih Tipe</option>
                     <option <?php echo ($data and $data->tipe == 'slide') ? 'selected' : '' ?> value="slide">Slide</option>
                     <option <?php echo ($data and $data->tipe == 'kontent') ? 'selected' : '' ?> value="kontent">Kontent</option>
@@ -56,7 +56,7 @@
         <div class="control-group">
             <label class="label" for="aktif">Aktif</label>
             <div class="control-input">
-                <input type="checkbox" name="aktif" value="1" <?php echo ($data and $data->aktif == 1) ? 'checked' : '' ?>>
+                <input type="checkbox" id="aktif" name="aktif" value="1" <?php echo ($data and $data->aktif == 1) ? 'checked' : '' ?>>
             </div>
         </div>
 

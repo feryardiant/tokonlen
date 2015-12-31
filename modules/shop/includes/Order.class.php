@@ -119,7 +119,7 @@ class Order extends Data
         static $cities;
 
         if (empty($cities)) {
-            if (file_exists($cities_path = __DIR__.'/../cities.json')) {
+            if (file_exists($cities_path = __DIR__ . '/../asset/cities.json')) {
                 $cities = file_get_contents($cities_path);
             }
         }

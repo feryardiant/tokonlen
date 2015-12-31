@@ -12,8 +12,16 @@ class Shop extends Module
     /**
      * {inheritdoc}
      */
-    public static function initialize(App $app = null)
+    public static function initialize(App $app = null, Config $config = null)
     {
+        $config->push('asset.css', [
+            'modules/shop/asset/style.css'
+        ]);
+
+        $config->push('asset.js', [
+            'modules/shop/asset/script.js'
+        ]);
+
         $app->add('routes', function ($c, $name) use ($app) {
             $routes = $app->get($name);
             $routes['admin-shop'] = 'shop/admin';

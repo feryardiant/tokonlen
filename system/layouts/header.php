@@ -9,15 +9,10 @@
     <link href="<?php echo site_url('asset/favicon.png') ?>" rel="shortcut icon">
     <!-- END FAVICON -->
     <!-- CSS -->
-    <link href="<?php echo site_url('asset/lib/jquery-ui.css') ?>" rel="stylesheet">
-    <link href="<?php echo site_url('asset/style.css') ?>" rel="stylesheet">
+    <?php echo app('asset.css') ?>
     <!-- END CSS -->
     <!-- JS -->
-    <script src="<?php echo site_url('asset/lib/jquery.min.js') ?>"></script>
-    <script src="<?php echo site_url('asset/lib/jquery-ui.min.js') ?>"></script>
-    <script src="<?php echo site_url('asset/lib/jquery-validate.min.js') ?>"></script>
-    <script src="<?php echo site_url('asset/lib/nicedit.js') ?>"></script>
-    <script src="<?php echo site_url('asset/script.js') ?>"></script>
+    <?php echo app('asset.js') ?>
     <!-- END JS -->
 </head>
 <body <?php bodyAttrs()?> data-siteurl="<?php echo site_url() ?>">

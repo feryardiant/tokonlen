@@ -2,6 +2,20 @@
 
 class Home extends Module
 {
+    /**
+     * {inheritdoc}
+     */
+    public static function initialize(App $app = null, Config $config = null)
+    {
+        $config->push('asset.css', [
+            'modules/home/asset/style.css'
+        ]);
+
+        $config->push('asset.js', [
+            'modules/home/asset/script.js'
+        ]);
+    }
+
     public function index($alias = null)
     {
         $data = ['pages' => Page::show()->fetch(false)];

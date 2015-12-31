@@ -19,7 +19,7 @@ class Module
      * @param  App|null $app Application instances
      * @return void
      */
-    public static function initialize(App $app = null)
+    public static function initialize(App $app = null, Config $config = null)
     {
         //
     }

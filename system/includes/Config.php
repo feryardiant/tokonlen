@@ -108,4 +108,36 @@ class Config
 
         $this->conf[$key] = $value;
     }
+
+    /**
+     * Method untuk menambahkan $value ke konfigurasi $key
+     *
+     * @param  string    $key    Nama Konfigurasi
+     * @param  string[]  $value  Nilai Konfigurasi
+     */
+    public function push($key, array $value)
+    {
+        if (!isset($this->conf[$key])) {
+            throw new InvalidArgumentException('Invalid configuration key: '.$key);
+        }
+
+        foreach ($value as $val) {
+            $this->conf[$key][] = $val;
+        }
+    }
+
+    /**
+     * Method untuk menggabungkan $value ke konfigurasi $key
+     *
+     * @param  string    $key    Nama Konfigurasi
+     * @param  string[]  $value  Nilai Konfigurasi
+     */
+    public function merge($key, array $value)
+    {
+        if (!isset($this->conf[$key])) {
+            throw new InvalidArgumentException('Invalid configuration key: '.$key);
+        }
+
+        $this->conf[$key] = array_merge($this->conf[$key], $value);
+    }
 }
