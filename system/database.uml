@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>f359d815-7756-4ced-a262-445ae266342c</OriginalElement>
+  <nodes>
+    <node x="1382.75" y="21.0">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_kategori</node>
+    <node x="10.5" y="215.5">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_banner</node>
+    <node x="1195.5" y="205.0">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_produk</node>
+    <node x="262.05" y="521.0">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_order</node>
+    <node x="819.9444444444442" y="211.33333333333326">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pelanggan</node>
+    <node x="455.0" y="0.0">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna</node>
+    <node x="460.5" y="214.25">f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_halaman</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_order" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pelanggan">
+      <point x="124.5" y="-172.0" />
+      <point x="635.55" y="496.55555555555554" />
+      <point x="998.0" y="496.55555555555554" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pelanggan" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna">
+      <point x="0.0" y="-77.5" />
+      <point x="998.0" y="185.0" />
+      <point x="700.6999999999999" y="185.0" />
+      <point x="70.19999999999993" y="77.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_produk" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna">
+      <point x="-112.25" y="-140.5" />
+      <point x="1307.75" y="175.0" />
+      <point x="770.9" y="175.0" />
+      <point x="140.39999999999998" y="77.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_order" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna">
+      <point x="-124.5" y="-172.0" />
+      <point x="386.55" y="499.8888888888889" />
+      <point x="0.0" y="499.8888888888889" />
+      <point x="0.0" y="175.0" />
+      <point x="490.1" y="175.0" />
+      <point x="-140.39999999999998" y="77.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_produk" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_kategori">
+      <point x="112.25" y="-140.5" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_banner" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna">
+      <point x="0.0" y="-130.0" />
+      <point x="225.5" y="185.0" />
+      <point x="560.3" y="185.0" />
+      <point x="-70.20000000000005" y="77.5" />
+    </edge>
+    <edge source="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_halaman" target="f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_pengguna">
+      <point x="0.0" y="-77.5" />
+      <point x="0.0" y="77.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="665.5555555555555" y="352.44444444444446" />
+  <SelectedNodes>
+    <node>f359d815-7756-4ced-a262-445ae266342c.TABLE:app_tokonlen.tbl_order</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+  </Categories>
+</Diagram>
+

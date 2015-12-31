@@ -49,7 +49,7 @@ $app->add('main-menu', function ($c) {
     return new Menu($menu);
 });
 
-$app->add('user-menu', function ($c) {
+$app->add('user-menu', function () {
     $items = [];
     if ($_tmp = session('cart-items')) {
         $items = unserialize($_tmp);
@@ -61,9 +61,9 @@ $app->add('user-menu', function ($c) {
     ];
 
     if (User::loggedin()) {
-        $admin_label    = $menu['/admin'];
+        $admin_label = $menu['/admin'];
         $menu['/admin'] = [
-            'label' => User::current('username') ?: 'Akun Saya',
+            'label' => User::current('username') ?: $admin_label,
             'subs'  => ['/logout' => 'Logout']
         ];
     }
@@ -71,7 +71,7 @@ $app->add('user-menu', function ($c) {
     return new Menu($menu);
 });
 
-$app->add('admin-menu', function ($c) {
+$app->add('admin-menu', function () {
     $menu = [];
     if (User::is('admin')) {
         $menu['admin/pages'] = 'Halaman';
