@@ -12,10 +12,10 @@ spl_autoload_register(function ($class) {
     static $classes = [];
 
     if (empty($classes)) {
-        foreach (glob(__DIR__.'/includes/**.php') as $classPath) {
+        foreach (glob(SYSPATH.'includes/**.php') as $classPath) {
             $classes[pathinfo($classPath, PATHINFO_FILENAME)] = $classPath;
         }
-        foreach (glob(__DIR__.'/../modules/*/includes/**.class.php') as $classPath) {
+        foreach (glob(ROOT.'modules/*/includes/**.class.php') as $classPath) {
             $className = str_replace('.class', '', $classPath);
             $classes[pathinfo($className, PATHINFO_FILENAME)] = realpath($classPath);
         }
@@ -27,7 +27,7 @@ spl_autoload_register(function ($class) {
 /**
  * Memuat File konfigurasi
  */
-$configs = new Config(require 'system/configs.php');
+$configs = new Config(require SYSPATH.'configs.php');
 
 /**
  * Inisialisasi Aplikasi dan menerapkan konfigurasi
@@ -44,7 +44,7 @@ App::debug($configs->get('debug'));
  * Function Loader
  * Memuat semua file yang ada dalam direktory 'helpers'.
  */
-foreach (glob(__DIR__.'/helpers/**.php') as $function) {
+foreach (glob(SYSPATH.'helpers/**.php') as $function) {
     require_once $function;
 }
 
