@@ -265,14 +265,14 @@ ul.alert {
 }
 
 #site-contents .sub-surat ul li {
-    list-style: none;
-    padding: 10px;
-    width: 20%;
-    text-align: center
+  list-style: none;
+  padding: 10px;
+  width: 20%;
+  text-align: center
 }
 
 #site-contents .sub-surat ul li:hover {
-    background: #eee;
+  background: #eee;
 }
 
 #content-header,

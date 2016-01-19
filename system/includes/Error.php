@@ -1,4 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 class Error
 {
@@ -18,23 +18,23 @@ class Error
     {
         $die = false;
         switch ($errno) {
-            case E_USER_ERROR:
-                $type = 'error';
-                $die = true;
+        case E_USER_ERROR:
+            $type = 'error';
+            $die = true;
             break;
-            case E_USER_WARNING:
-            case E_WARNING:
-            case @E_RECOVERABLE_ERROR:
-                $type = 'warning';
+        case E_USER_WARNING:
+        case E_WARNING:
+        case @E_RECOVERABLE_ERROR:
+            $type = 'warning';
             break;
-            case E_USER_NOTICE:
-            case E_NOTICE:
-            case @E_STRICT:
-                $type = 'notice';
+        case E_USER_NOTICE:
+        case E_NOTICE:
+        case @E_STRICT:
+            $type = 'notice';
             break;
-            default:
-                $type = '';
-                $die = true;
+        default:
+            $type = '';
+            $die = true;
             break;
         }
 

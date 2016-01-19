@@ -34,7 +34,7 @@ class Admin extends Module
         switch ($do) {
             case 'form':
                 if (post('submit')) {
-                    $data = [
+                    $form_data = [
                         'id_pengguna' => User::current('id'),
                         'tgl_input' => date('Y-m-d'),
                         'judul' => post('judul'),
@@ -42,31 +42,31 @@ class Admin extends Module
                         'konten' => post('konten', false),
                     ];
 
-                    $data['konten'] = str_replace(['<br>', '<br/>'], '', $data['konten']);
+                    $form_data['konten'] = str_replace(['<br>', '<br/>'], '', $form_data['konten']);
 
-                    if (Page::save($data, $id)) {
+                    if (Page::save($form_data, $id)) {
                         if ($id) {
-                            set_alert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil diperbarui');
+                            set_alert('success', 'Halaman <b>'.$form_data['judul'].'</b> berhasil diperbarui');
                         } else {
-                            set_alert('success', 'Halaman <b>'.$data['judul'].'</b> berhasil dibuat');
+                            set_alert('success', 'Halaman <b>'.$form_data['judul'].'</b> berhasil dibuat');
                         }
 
                         return redirect('admin/pages');
                     }
 
-                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan halaman <b>'.$data['judul'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan halaman <b>'.$form_data['judul'].'</b>');
                     return redirect($this->uri->path());
                 }
 
                 if ($id) {
-                    $data['data'] = Page::show([Page::primary() => $id])->fetchOne();
+                    $data['data'] = Page::show((int) $id)->fetchOne();
                 }
 
                 return $this->render('page-form', $data);
                 break;
 
             case 'delete':
-                if (Page::del([Page::primary() => $id])) {
+                if (Page::del((int) $id)) {
                     set_alert('success', 'Halaman berhasil terhapus');
                 } else {
                     set_alert('error', 'Terjadi kesalahan dalam penghapusan halaman');
@@ -90,42 +90,42 @@ class Admin extends Module
         switch ($do) {
             case 'form':
                 if (post('submit')) {
-                    $data = [
+                    $form_data = [
                         'username' => post('username'),
                         'email' => post('email'),
                     ];
 
                     if (User::is('admin')) {
-                        $data['level'] = post('level');
+                        $form_data['level'] = post('level');
                     }
 
                     if (($password = post('password')) and $password == post('passconf')) {
-                        $data['password'] = $password;
+                        $form_data['password'] = $password;
                     }
 
-                    if (User::save($data, $id)) {
+                    if (User::save($form_data, $id)) {
                         if ($id) {
-                            set_alert('success', 'Berhasil memperbarui data pengguna <b>'.$data['username'].'</b>');
+                            set_alert('success', 'Berhasil memperbarui data pengguna <b>'.$form_data['username'].'</b>');
                         } else {
-                            set_alert('success', 'Berhasil menambahkan <b>'.$data['username'].'</b> sebagai pengguna');
+                            set_alert('success', 'Berhasil menambahkan <b>'.$form_data['username'].'</b> sebagai pengguna');
                         }
 
                         return redirect('admin/users');
                     }
 
-                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan pengguna <b>'.$data['username'].'</b>');
+                    set_alert('error', 'Terjadi kesalahan dalam penyimpanan pengguna <b>'.$form_data['username'].'</b>');
                     return redirect($this->uri->path());
                 }
 
                 if ($id) {
-                    $data['data'] = User::show([User::primary() => $id])->fetchOne();
+                    $data['data'] = User::show((int) $id)->fetchOne();
                 }
 
                 return $this->render('user-form', $data);
                 break;
 
             case 'delete':
-                if (User::del([User::primary() => $id])) {
+                if (User::del((int) $id)) {
                     set_alert('success', 'Pengguna berhasil terhapus');
                 } else {
                     set_alert('error', 'Terjadi kesalahan dalam penghapusan pengguna');

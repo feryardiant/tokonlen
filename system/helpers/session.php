@@ -1,18 +1,20 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 /**
  * Array Helper
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Method untuk menerapkan dan mendapatkan Session Aplikasi
  *
- * @param   string  $key    Session Key
- * @param   string  $value  Session Value (kosongkan untuk mendapatkan nilai
+ * @param  string $key   Session Key
+ * @param  string $value Session Value (kosongkan untuk mendapatkan nilai dari $key, dan isi jika ingin mengubah nilai $Key) dari $key, dan isi jika ingin mengubah nilai $Key)
  *                          dari $key, dan isi jika ingin mengubah nilai $Key)
- * @return  mixed
+ * @return mixed
  */
-function session($key, $value = null) {
+function session($key, $value = null) 
+{
     // Jika $value bernilai null
     if (is_null($value)) {
         // Jika $key bertipe array
@@ -34,9 +36,10 @@ function session($key, $value = null) {
 /**
  * Menghapus Semua Session
  *
- * @return  void
+ * @return void
  */
-function session_clear($key) {
+function session_clear($key) 
+{
     if (is_array($key)) {
         foreach ($key as $k) {
             session_clear($k);
@@ -51,9 +54,10 @@ function session_clear($key) {
 /**
  * Menghapus Semua Session
  *
- * @return  void
+ * @return void
  */
-function session_drop() {
+function session_drop() 
+{
     unset($_SESSION);
     session_destroy();
 }

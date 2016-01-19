@@ -1,4 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 class Config
 {
@@ -41,7 +41,7 @@ class Config
     /**
      * Class Constructor
      *
-     * @param  array  $configs  Konfigurasi
+     * @param array $configs Konfigurasi
      */
     public function __construct(array $conf = [])
     {
@@ -51,7 +51,7 @@ class Config
     /**
      * Method untuk mendapatkan semua nilai konfigurasi
      *
-     * @return  array
+     * @return array
      */
     public function all()
     {
@@ -61,7 +61,7 @@ class Config
     /**
      * Method untuk mendapatkan semua nilai konfigurasi secara flat
      *
-     * @return  array
+     * @return array
      */
     public function allFlatten()
     {
@@ -82,8 +82,8 @@ class Config
     /**
      * Method untuk mendapatkan nilai dari konfigurasi $key
      *
-     * @param   string  $key  Nama Konfigurasi
-     * @return  mixed
+     * @param  string $key Nama Konfigurasi
+     * @return mixed
      */
     public function get($key)
     {
@@ -97,8 +97,8 @@ class Config
     /**
      * Method untuk menerapkan $value ke konfigurasi $key
      *
-     * @param  string  $key    Nama Konfigurasi
-     * @param  mixed   $value  Nilai Konfigurasi
+     * @param string $key   Nama Konfigurasi
+     * @param mixed  $value Nilai Konfigurasi
      */
     public function add($key, $value)
     {
@@ -112,8 +112,8 @@ class Config
     /**
      * Method untuk menambahkan $value ke konfigurasi $key
      *
-     * @param  string    $key    Nama Konfigurasi
-     * @param  string[]  $value  Nilai Konfigurasi
+     * @param string   $key   Nama Konfigurasi
+     * @param string[] $value Nilai Konfigurasi
      */
     public function push($key, array $value)
     {
@@ -129,8 +129,8 @@ class Config
     /**
      * Method untuk menggabungkan $value ke konfigurasi $key
      *
-     * @param  string    $key    Nama Konfigurasi
-     * @param  string[]  $value  Nilai Konfigurasi
+     * @param string   $key   Nama Konfigurasi
+     * @param string[] $value Nilai Konfigurasi
      */
     public function merge($key, array $value)
     {

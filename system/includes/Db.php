@@ -1,4 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 class Db
 {
@@ -30,7 +30,7 @@ class Db
     /**
      * Class Constructor
      *
-     * @param  array  $configs  Konfigurasi
+     * @param array $configs Konfigurasi
      */
     public function __construct(array $configs = [])
     {
@@ -45,7 +45,7 @@ class Db
     /**
      * Koneksi database
      *
-     * @return  void
+     * @return void
      */
     public function connect(array $configs = [])
     {
@@ -73,14 +73,15 @@ class Db
 
     /**
      * Eksekutor
-     * ---------------------------------------------------------------------- */
+     * ---------------------------------------------------------------------- 
+*/
 
     /**
      * Query database
      *
-     * @param   string        $sql          SQL Query
-     * @param   array|string  $replacement  Replacement
-     * @return  mixed
+     * @param  string       $sql         SQL Query
+     * @param  array|string $replacement Replacement
+     * @return mixed
      */
     public function query()
     {
@@ -122,7 +123,7 @@ class Db
     /**
      * Mendapatkan jumlah record dari query
      *
-     * @return  int
+     * @return int
      */
     public function count()
     {
@@ -132,8 +133,8 @@ class Db
     /**
      * Menerapkan pembatasan jumlah record hasil query
      *
-     * @param   mixed  $limit  Jumlah pembatasan
-     * @return  [type]
+     * @param  mixed $limit Jumlah pembatasan
+     * @return [type]
      */
     protected function doLimit($limit = null)
     {
@@ -161,8 +162,8 @@ class Db
     /**
      * Mendapatkan hasil eksekusi query
      *
-     * @param   string  $limit  Jumlah pembatasan output
-     * @return  mixed
+     * @param  string $limit Jumlah pembatasan output
+     * @return mixed
      */
     public function fetch($limit = null)
     {
@@ -185,7 +186,7 @@ class Db
     /**
      * Mendapatkan 1 hasil eksekusi query
      *
-     * @return  mixed
+     * @return mixed
      */
     public function fetchOne()
     {
@@ -203,17 +204,18 @@ class Db
 
     /**
      * Utama
-     * ---------------------------------------------------------------------- */
+     * ---------------------------------------------------------------------- 
+*/
 
     /**
      * Menampilkan data dari Database
      *
-     * @param   string        $table    Nama Tabel
-     * @param   string        $column   Kolom
-     * @param   array         $where    Pernyataan `where` dalam array
-     * @param   bool|integer  $limit    Batasan output
-     * @param   string        $sort     Sorting data
-     * @return  mixed
+     * @param  string       $table  Nama Tabel
+     * @param  string       $column Kolom
+     * @param  array        $where  Pernyataan `where` dalam array
+     * @param  bool|integer $limit  Batasan output
+     * @param  string       $sort   Sorting data
+     * @return mixed
      */
     public function select($table, $column = '', $where = [], $sort = '')
     {
@@ -249,13 +251,14 @@ class Db
     /**
      * Menyimpan data baru kedalam $table
      *
-     * @param   string  $table  Nama Tabel
-     * @param   array   $data   Data yang akan dimasukan
-     * @return  bool
+     * @param  string $table Nama Tabel
+     * @param  array  $data  Data yang akan dimasukan
+     * @return bool
      */
     public function insert($table, $data = [])
     {
-        if (empty($data)) return false;
+        if (empty($data)) { return false; 
+        }
 
         $values = [];
 
@@ -290,14 +293,15 @@ class Db
     /**
      * Memperbarui data pada $table
      *
-     * @param   string  $table  Nama Tabel
-     * @param   array   $data   Data yang akan diperbarui
-     * @param   array   $where  Kodisi
-     * @return  bool
+     * @param  string $table Nama Tabel
+     * @param  array  $data  Data yang akan diperbarui
+     * @param  array  $where Kodisi
+     * @return bool
      */
     public function update($table, $data = [], $where = [])
     {
-        if (empty($data)) return false;
+        if (empty($data)) { return false; 
+        }
 
         $wheres = $this->_parseWhere($where);
         $data = $this->_parseArgs($data, ',');
@@ -317,9 +321,9 @@ class Db
     /**
      * Menghapus data pada $table
      *
-     * @param   string  $table  Nama Tabel
-     * @param   array   $where  Kondisi
-     * @return  bool
+     * @param  string $table Nama Tabel
+     * @param  array  $where Kondisi
+     * @return bool
      */
     public function delete($table, $where = [])
     {
@@ -338,8 +342,8 @@ class Db
     /**
      * Melakukan import ke database
      *
-     * @param   string  $filename  Nama file (database.sql) yang akan diimport
-     * @return  bool
+     * @param  string $filename Nama file (database.sql) yang akan diimport
+     * @return bool
      */
     public function import($filename)
     {
@@ -348,7 +352,8 @@ class Db
         $query = '';
 
         foreach ($lines as $line) {
-            if (substr($line, 0, 2) == '--' or $line == '') continue;
+            if (substr($line, 0, 2) == '--' or $line == '') { continue; 
+            }
 
             $query .= trim($line).' ';
 
@@ -370,8 +375,8 @@ class Db
     /**
      * Melakukan export (backup) database
      *
-     * @todo    selesaikan!
-     * @return  null
+     * @todo   selesaikan!
+     * @return null
      */
     public function export()
     {
@@ -397,12 +402,13 @@ class Db
     /**
      * Pengolahan array agar menghasilkan klausa WHERE untuk sql query
      *
-     * @param   array|string  $where  Klausa untuk diolah
-     * @return  string
+     * @param  array|string $where Klausa untuk diolah
+     * @return string
      */
     public function _parseWhere($where)
     {
-        if (empty($where)) return;
+        if (empty($where)) { return; 
+        }
         $return = 'WHERE';
 
         // Jika klausa merupakan array
@@ -419,9 +425,9 @@ class Db
     /**
      * Mengolah array menjadi suatu klausa tertentu untuk digunakan dalam database
      *
-     * @param   array   $args   Array untuk diolah
-     * @param   string  $sep    Pembatasan tertentu
-     * @return  string
+     * @param  array  $args Array untuk diolah
+     * @param  string $sep  Pembatasan tertentu
+     * @return string
      */
     protected function _parseArgs(array $args, $sep = '')
     {
@@ -454,7 +460,7 @@ class Db
     /**
      * Mendapatkan nilai primary key dari data yang baru saja di masukan (simpan)
      *
-     * @return  string
+     * @return string
      */
     function getInsertId()
     {
@@ -469,8 +475,8 @@ class Db
     /**
      * Menyaring karakter yang tidak diinginkan agar tidak masuk ke database
      *
-     * @param   string  $str  Karakter yang akan disaring
-     * @return  string
+     * @param  string $str Karakter yang akan disaring
+     * @return string
      */
     function escape($str)
     {

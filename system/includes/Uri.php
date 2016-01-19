@@ -1,4 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 class Uri
 {
@@ -8,8 +8,8 @@ class Uri
     /**
      * Mendapatkan url cantik untuk aplikasi
      *
-     * @param   bool    $prefix_slash  Apakah output url ingin diawali dengan '/' diawal.
-     * @return  string
+     * @param  bool $prefix_slash Apakah output url ingin diawali dengan '/' diawal.
+     * @return string
      */
     public function __construct($prefix_slash = false)
     {
@@ -56,8 +56,8 @@ class Uri
     /**
      * Basis URL aplikasi
      *
-     * @param   string  Permalink
-     * @return  string
+     * @param  string  Permalink
+     * @return string
      */
     public function base($permalink = '')
     {
@@ -72,8 +72,8 @@ class Uri
     /**
      * Digunakan untuk mendapatkan URL saat ini
      *
-     * @param   string  $permalink  URL tambahan bila perlu
-     * @return  string
+     * @param  string $permalink URL tambahan bila perlu
+     * @return string
      */
     public function current($permalink = '', $trim = false)
     {
@@ -91,8 +91,8 @@ class Uri
     /**
      * Method untuk mendapatkan segmentasi URL
      *
-     * @param   int     $num  Segment Url
-     * @return  string
+     * @param  int $num Segment Url
+     * @return string
      */
     public function segment($num)
     {
@@ -106,7 +106,7 @@ class Uri
     /**
      * Uri segments
      *
-     * @return  string
+     * @return string
      */
     public function segments()
     {
@@ -116,7 +116,7 @@ class Uri
     /**
      * Uri string
      *
-     * @return  string
+     * @return string
      */
     public function path()
     {

@@ -1,15 +1,17 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 /**
  * Base Helper
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Shortcut untuk mendapatkan semua instance kelas App
  *
- * @return  object
+ * @return object
  */
-function app($container = '') {
+function app($container = '') 
+{
     $app =& App::instance();
 
     if ($container) {
@@ -22,11 +24,12 @@ function app($container = '') {
 /**
  * Shortcut untuk mendapatkan instance konfigurasi
  *
- * @param   string  $key    Nama Konfigurasi
- * @param   mixed   $value  Nilai Konfigurasi
- * @return  mixed
+ * @param  string $key   Nama Konfigurasi
+ * @param  mixed  $value Nilai Konfigurasi
+ * @return mixed
  */
-function conf($key = null, $value = null) {
+function conf($key = null, $value = null) 
+{
     static $conf;
 
     if ($value !== null) {
@@ -42,15 +45,17 @@ function conf($key = null, $value = null) {
 
 /**
  * URL
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Basis URL aplikasi
  *
- * @param   string  Permalink
- * @return  string
+ * @param  string  Permalink
+ * @return string
  */
-function site_url($permalink = '') {
+function site_url($permalink = '') 
+{
     if (in_array(substr($permalink, 0, 1), ['#', '?'])) {
         $permalink = app('uri')->path().$permalink;
     }
@@ -61,10 +66,11 @@ function site_url($permalink = '') {
 /**
  * Digunakan untuk mendapatkan URL saat ini
  *
- * @param   string  $permalink  URL tambahan bila perlu
- * @return  string
+ * @param  string $permalink URL tambahan bila perlu
+ * @return string
  */
-function current_url($permalink = '', $trim = false) {
+function current_url($permalink = '', $trim = false) 
+{
     $req = !empty($_GET) ? '?'.http_build_query($_GET) : '';
     $url = site_url(app('uri')->path().$req);
 
@@ -82,10 +88,11 @@ function current_url($permalink = '', $trim = false) {
 /**
  * Digunakan untuk pengalihan halaman (URL)
  *
- * @param   string  $url  URL Tujuan
- * @return  bool
+ * @param  string $url URL Tujuan
+ * @return bool
  */
-function redirect($url = '', $delay = false) {
+function redirect($url = '', $delay = false) 
+{
     if (PHP_SAPI != 'cli') {
         $url = strpos('?', $url) === 1 ? current_url($url) : site_url($url);
 
@@ -104,15 +111,17 @@ function redirect($url = '', $delay = false) {
 
 /**
  * Request Helper
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Mendapatkan nilai dari $_REQUEST request
  *
- * @param   string  Nama field
- * @return  string
+ * @param  string  Nama field
+ * @return string
  */
-function req($key) {
+function req($key) 
+{
     if (isset($_REQUEST[$key])) {
         return escape($_REQUEST[$key]);
     }
@@ -122,10 +131,11 @@ function req($key) {
 /**
  * Mendapatkan nilai dari $_GET request
  *
- * @param   string  Nama field
- * @return  string
+ * @param  string  Nama field
+ * @return string
  */
-function get($key) {
+function get($key) 
+{
     if (isset($_GET[$key])) {
         return escape($_GET[$key]);
     }
@@ -135,10 +145,11 @@ function get($key) {
 /**
  * Mendapatkan nilai dari $_POST request
  *
- * @param   string  Nama field
- * @return  string
+ * @param  string  Nama field
+ * @return string
  */
-function post($key, $escape = true) {
+function post($key, $escape = true) 
+{
     if (isset($_POST[$key])) {
         if (!is_array($_POST[$key]) and $escape === true) {
             return escape($_POST[$key]);
@@ -150,15 +161,17 @@ function post($key, $escape = true) {
 
 /**
  * Page Alert
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Fungsi untuk menyimpan alert
  *
- * @param  string  $type      Type alert
- * @param  mixed   $messages  Isi alert
+ * @param string $type     Type alert
+ * @param mixed  $messages Isi alert
  */
-function set_alert($type, $messages) {
+function set_alert($type, $messages) 
+{
     // Jika tipe tidak terdaftar, maka $type = 'notice'
     if (!in_array($type, ['warning', 'error', 'notice', 'success'])) {
         $type = 'notice';
@@ -178,9 +191,10 @@ function set_alert($type, $messages) {
 /**
  * Fungsi untuk menampilkan alert
  *
- * @return  string
+ * @return string
  */
-function show_alert() {
+function show_alert() 
+{
     $out = '';
     $alerts = unserialize(session('flash'));
 

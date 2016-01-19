@@ -14,19 +14,12 @@ class Shop extends Module
      */
     public static function initialize(App $app = null, Config $config = null)
     {
-        $config->push('asset.css', [
-            'modules/shop/asset/style.css'
-        ]);
+        $config->push('asset.css', [__DIR__.'/asset/style.css']);
+        $config->push('asset.js',  [__DIR__.'/asset/script.js']);
 
-        $config->push('asset.js', [
-            'modules/shop/asset/script.js'
+        $config->merge('routes', [
+            'admin-shop' => 'shop/admin',
         ]);
-
-        $app->add('routes', function ($c, $name) use ($app) {
-            $routes = $app->get($name);
-            $routes['admin-shop'] = 'shop/admin';
-            return $routes;
-        });
 
         $nav = [];
 

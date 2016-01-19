@@ -6,6 +6,8 @@ class AdminShop extends Module
     {
         parent::__construct();
 
+        if (!User::loggedin()) redirect('login');
+
         $this->data['data'] = null;
     }
 
@@ -136,7 +138,7 @@ class AdminShop extends Module
                 break;
 
             case 'delete':
-                if (Order::del([Order::primary() => $id])) {
+                if (Order::del((int) $id)) {
                     set_alert('success', 'Order berhasil terhapus');
                 } else {
                     set_alert('error', 'Terjadi kesalahan dalam penghapusan order');

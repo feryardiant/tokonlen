@@ -13,7 +13,7 @@ define('EXT', '.php');
  */
 $app = require 'system/loader.php';
 
-$app->add('routes', function ($c) {
+$app->add('routes', function ($c, $name) {
     $routes = [
         'login'    => 'home/login',
         'register' => 'home/register',
@@ -29,6 +29,8 @@ $app->add('routes', function ($c) {
     foreach ($c->get('pages') as $row) {
         $routes[$row->alias] = 'home/index/'.$row->alias;
     }
+
+    $c->merge($name, $routes);
 
     return $routes;
 });

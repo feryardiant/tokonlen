@@ -7,13 +7,8 @@ class Home extends Module
      */
     public static function initialize(App $app = null, Config $config = null)
     {
-        $config->push('asset.css', [
-            'modules/home/asset/style.css'
-        ]);
-
-        $config->push('asset.js', [
-            'modules/home/asset/script.js'
-        ]);
+        $config->push('asset.css', [__DIR__.'/asset/style.css']);
+        $config->push('asset.js',  [__DIR__.'/asset/script.js']);
     }
 
     public function index($alias = null)
@@ -30,16 +25,16 @@ class Home extends Module
             $data['content'] = $page->konten;
 
             return $this->render('page', $data);
-        } else {
-            $data['heading']  = 'Selamat datang di website resmi '.conf('app.title');
-            $data['products'] = Product::show()->fetch(5);
-            $data['slides']   = Banner::show([
-                'tipe'  => 'slide',
-                'aktif' => 1,
-            ])->fetch(3);
-
-            return $this->render('home', $data);
         }
+
+        $data['heading']  = 'Selamat datang di website resmi '.conf('app.title');
+        $data['products'] = Product::show()->fetch(5);
+        $data['slides']   = Banner::show([
+            'tipe'  => 'slide',
+            'aktif' => 1,
+        ])->fetch(3);
+
+        return $this->render('home', $data);
     }
 
     public function login()
@@ -59,15 +54,15 @@ class Home extends Module
                 ];
 
                 if ($user->level !== 1) {
-                    $pelanggan = Customer::show(['id_pengguna' => $user->id_pengguna])->fetchOne();
-                    $login['id_pelanggan'] = $pelanggan->id_pelanggan;
+                    $pelanggan = Customer::show([User::primary() => $user->id_pengguna])->fetchOne();
+                    $login[Customer::primary()] = $pelanggan->id_pelanggan;
                 }
 
                 session($login);
-                redirect('admin-shop/orders');
-            } else {
-                set_alert('error', 'Login gagal');
+                return redirect('admin-shop/orders');
             }
+
+            set_alert('error', 'Login gagal');
         }
 
         return $this->render('form-login', [
@@ -101,11 +96,11 @@ class Home extends Module
 
                 if (Customer::add($pelanggan)) {
                     set_alert('success', 'Registrasi berhasil, silahkan login ke akun yang baru saja anda buat');
-                    redirect('login');
-                } else {
-                    set_alert('error', 'Maaf registrasi gagal');
-                    redirect('register');
+                    return redirect('login');
                 }
+
+                set_alert('error', 'Maaf registrasi gagal');
+                return redirect('register');
             }
         }
 
@@ -118,6 +113,7 @@ class Home extends Module
     {
         session(['auth' => 0, 'id' => '', 'username' => '', 'level' => '']);
         session_clear(['auth', 'id', 'username', 'level']);
-        redirect('');
+
+        return redirect('');
     }
 }

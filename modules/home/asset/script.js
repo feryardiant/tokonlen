@@ -4,15 +4,21 @@ $(function () {
     , left = 0, width = 930
     , total = width * $('.slide').size()
 
-  $slider.css({width: total, height: 300})
+  $slider.hide()
 
-  setInterval(function () {
-    if (left >= -(total - (width * 2))) {
-      left = left - width
-    } else {
-      left = 0
-    }
+  $(document).ready(function () {
+    $slider.show()
 
-    $slider.css('margin-left', left)
-  }, 5000)
+    $slider.css({ width: total, height: 300 })
+
+    setInterval(function () {
+      if (left >= -(total - (width * 2))) {
+        left = left - width
+      } else {
+        left = 0
+      }
+
+      $slider.css('margin-left', left)
+    }, 5000)
+  })
 })

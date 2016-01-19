@@ -1,4 +1,4 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 class Menu
 {
@@ -58,10 +58,12 @@ class Menu
                 if (is_string($label)) {
                     $out .= '<li'.$class.'>'.anchor($link, $label).'</li>';
                 } else {
-                    $attrs = array_set_defaults($label, [
+                    $attrs = array_set_defaults(
+                        $label, [
                         'label' => '',
                         'subs'  => [],
-                    ]);
+                        ]
+                    );
 
                     $out .= '<li'.$class.'>';
                     $out .= anchor($link, $attrs['label']);

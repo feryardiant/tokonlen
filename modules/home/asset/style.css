@@ -1,32 +1,32 @@
 #slider-home {
-    width: 100%;
-    margin-bottom: 20px;
-    overflow: hidden;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .slider {
-    -webkit-transition: all 1.0s ease-in-out;
-    -moz-transition: all 1.0s ease-in-out;
-    -o-transition: all 1.0s ease-in-out;
-    transition: all 1.0s ease-in-out;
+  -webkit-transition: all 1.0s ease-in-out;
+  -moz-transition: all 1.0s ease-in-out;
+  -o-transition: all 1.0s ease-in-out;
+  transition: all 1.0s ease-in-out;
 }
 
 .slide {
-    position: relative;
-    width: 930px;
-    height: 290px;
-    float: left;
-    z-index: 1;
+  position: relative;
+  width: 930px;
+  height: 290px;
+  float: left;
+  z-index: 1;
 }
 
 .slide-text {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    font-size: 36px;
-    line-height: 40px;
-    color: #fff;
-    background: rgba(0,0,0,.3);
-    padding: 10px 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  font-size: 36px;
+  line-height: 40px;
+  color: #fff;
+  background: rgba(0,0,0,.3);
+  padding: 10px 20px;
 }

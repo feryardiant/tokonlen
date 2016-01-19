@@ -1,17 +1,19 @@
-<?php defined('ROOT') or die ('Not allowed!');
+<?php defined('ROOT') or die('Not allowed!');
 
 /**
  * Link
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Setup Anchor tag
  *
- * @param   mixed   $url    Path or Permalink
- * @param   string  $label  Text label
- * @return  string
+ * @param  mixed  $url   Path or Permalink
+ * @param  string $label Text label
+ * @return string
  */
-function anchor($url, $label = '', array $extras = []) {
+function anchor($url, $label = '', array $extras = []) 
+{
     if (is_array($url) and $label == '') {
         $attrs = $url;
         $label = $attrs['label'];
@@ -37,14 +39,16 @@ function anchor($url, $label = '', array $extras = []) {
 
 /**
  * Attribute
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
 /**
  * Get Body Attributes
  *
- * @return  string
+ * @return string
  */
-function bodyAttrs($class = null) {
+function bodyAttrs($class = null) 
+{
     $attrs = ['id' => 'home', 'class' => 'halaman'];
     $classes = [];
 
@@ -76,11 +80,13 @@ function bodyAttrs($class = null) {
 /**
  * Get html attributes from array
  *
- * @param   array   $attrs  HTML Attributes
- * @return  string
+ * @param  array $attrs HTML Attributes
+ * @return string
  */
-function parseAttrs(array $attrs) {
-    if (empty($attrs)) return;
+function parseAttrs(array $attrs) 
+{
+    if (empty($attrs)) { return; 
+    }
 
     $attr = [];
     foreach ($attrs as $key => $value) {
@@ -111,9 +117,11 @@ function parseAttrs(array $attrs) {
 
 /**
  * Pagination
- * -------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- 
+*/
 
-function pagination($total) {
+function pagination($total) 
+{
     $output = '';
     $limit = conf('db.limit');
 

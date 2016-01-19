@@ -8,6 +8,9 @@ class App
     // Container aplikasi
     private $container = [];
 
+    // Cache Container aplikasi
+    private $containerCache = [];
+
     // Buffer Level
     private $buffer;
 
@@ -45,29 +48,10 @@ class App
             return new Error;
         });
 
-        // Inisiasi routing container
-        $this->add('routes', function () {
-            return [];
-        });
-
         // Inisiasi uri container
         $this->add('uri', function () {
             return new Uri;
         });
-
-        $this->conf('asset.css', [
-            'asset/lib/jquery-ui.css',
-            'asset/reset.css',
-            'asset/style.css',
-        ]);
-
-        $this->conf('asset.js', [
-            'asset/lib/jquery.min.js',
-            'asset/lib/jquery-ui.min.js',
-            'asset/lib/jquery-validate.min.js',
-            'asset/lib/nicedit.js',
-            'asset/script.js',
-        ]);
 
         // Inisiasi modules container
         $this->add('modules', function ($c, $name) {
@@ -77,6 +61,55 @@ class App
 
             return $modules;
         });
+
+        // Inisiasi stylesheets container
+        $this->add('asset.css', function ($c, $name) {
+            $out = [];
+
+            foreach ($c->get($name) as $css) {
+                if (strpos($css, ROOT) === 0) {
+                    $css = str_replace(ROOT, '', $css);
+                }
+
+                $out[] = '<link href="'.site_url($css).'" rel="stylesheet">';
+            }
+
+            return implode(PHP_EOL, $out);
+        });
+
+        // Inisiasi javascripts container
+        $this->add('asset.js', function ($c, $name) {
+            $out = [];
+
+            foreach ($c->get($name) as $js) {
+                if (strpos($js, ROOT) === 0) {
+                    $js = str_replace(ROOT, '', $js);
+                }
+
+                $out[] = '<script src="'.site_url($js).'"></script>';
+            }
+
+            return implode(PHP_EOL, $out);
+        });
+
+        // Inisiasi router storage
+        $this->conf('routes', []);
+
+        // Inisiasi stylesheets storage
+        $this->conf('asset.css', [
+            'asset/lib/jquery-ui.css',
+            'asset/reset.css',
+            'asset/style.css',
+        ]);
+
+        // Inisiasi javascripts storage
+        $this->conf('asset.js', [
+            'asset/lib/jquery.min.js',
+            'asset/lib/jquery-ui.min.js',
+            'asset/lib/jquery-validate.min.js',
+            'asset/lib/nicedit.js',
+            'asset/script.js',
+        ]);
     }
 
     /**
@@ -132,25 +165,54 @@ class App
     /**
      * Menambahkan kontainer baru
      *
-     * @param  string   $name      Nama Container
-     * @param  Closure  $instance  Closure (http://php.net/manual/en/class.closure.php)
+     * @param string   $name     Nama Container
+     * @param callable $callback Closure (http://php.net/manual/en/class.closure.php)
      */
-    public function add($name, Closure $instance)
+    public function add($name, callable $callback)
     {
-        $this->container[$name] = $instance($this->conf, $name);
+        // if ($callback instanceof Closure) {
+        //     $callback = $callback->bindTo(self::$instance);
+        // }
+
+        $this->container[$name] = $callback;
+    }
+
+    /**
+     * Menambahkan kontainer baru
+     *
+     * @param string   $name     Nama Container
+     * @param callable $callback Closure (http://php.net/manual/en/class.closure.php)
+     */
+    public function extend($name, callable $callback)
+    {
+        if (!isset($this->container[$name])) {
+            throw new Exception('Could not extend non existing Container ' . $name);
+        }
+
+        $prev = $this->get($name);
+        $this->container[$name] = function ($conf, $name) use ($prev, $callback) {
+            return $callback($prev, $conf, $name);
+        };
     }
 
     /**
      * Get container
      *
-     * @param   string  $val  Container name
+     * @param   string  $name  Container name
      * @return  mixed
      */
-    public function get($val)
+    public function get($name)
     {
-        if (isset($this->container[$val])) {
-            return $this->container[$val];
+        if (!isset($this->container[$name])) {
+            throw new Exception('Container ' . $name . ' not found.');
         }
+
+        if (!isset($this->containerCache[$name])) {
+            $callback = $this->container[$name];
+            $this->containerCache[$name] = $callback($this->conf, $name);
+        }
+
+        return $this->containerCache[$name];
     }
 
     /**
@@ -162,10 +224,12 @@ class App
     public static function debug($enable = false)
     {
         $app =& self::instance();
+        $err = $app->get('errors');
+
         // @link http://php.net/manual/en/function.set-error-handler.php
-        set_error_handler([$app->get('errors'), 'errHandler']);
+        set_error_handler([$err, 'errHandler']);
         // @link http://php.net/manual/en/function.set-exception-handler.php
-        set_exception_handler([$app->get('errors'), 'excHandler']);
+        set_exception_handler([$err, 'excHandler']);
 
         if ($enable) {
             error_reporting(E_ALL);
@@ -221,34 +285,15 @@ class App
             $uri    = $this->get('uri');
             $module = $this->get('modules');
 
-            foreach ($module->all() as $mod) {
+            foreach ($this->conf('modules') as $mod) {
                 $init = ucfirst($mod).'::initialize';
                 if (is_callable($init)) {
                     call_user_func($init, $this, $this->conf);
                 }
             }
 
-            $this->add('asset.css', function ($c, $name) {
-                $out = [];
-
-                foreach ($c->get($name) as $css) {
-                    $out[] = '<link href="'.site_url($css).'" rel="stylesheet">';
-                }
-
-                return implode(PHP_EOL, $out);
-            });
-
-            $this->add('asset.js', function ($c, $name) {
-                $out = [];
-
-                foreach ($c->get($name) as $js) {
-                    $out[] = '<script src="'.site_url($js).'"></script>';
-                }
-
-                return implode(PHP_EOL, $out);
-            });
-
-            $routes = $this->get('routes');
+            $this->get('routes');
+            $routes = $this->conf('routes');
             $path = $uri->path() ?: $this->conf('basemod');
 
             list($route) = explode('/', $path);
@@ -295,7 +340,7 @@ class App
                 $this->header($view);
                 $view = $layout.'error.php';
             } else {
-                $module = $this->container['modules'];
+                $module = $this->get('modules');
                 $view = $module->path().'layouts/'.$view.'.php';
             }
 
