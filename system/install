@@ -45,7 +45,7 @@ if ($argc > 1) {
         help(true);
     }
 
-    $base_url = strtolower($argv[1]);
+    $base_url = $argv[1];
 }
 
 $dbConf     = $argc >= 3 ? 'mysql://'.$argv[2] : '';
