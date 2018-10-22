@@ -13,8 +13,9 @@
     "scripts": {
         "post-install-cmd": "php system/install"
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
