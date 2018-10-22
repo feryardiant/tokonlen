@@ -10,13 +10,12 @@ Just another simple yet modular PHP Application :grin:
 
 ## Install
 
-Simply clone this repo to your local directory then `cd` into it.
+Simply create new composer project.
 
 ```bash
-$ git clone git@github.com:feryardiant/tokonlen.git --depth 1 my-app
+$ composer create-prject feryardiant/tokonlen my-app
 $ cd my-app
 ```
-**Note**: use `--depth 1` option to clone only one last commit history.
 
 then you need to create new database, you could do it from PHPMyAdmin or simply run.
 
