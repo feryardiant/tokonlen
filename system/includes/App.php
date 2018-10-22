@@ -227,9 +227,9 @@ class App
         $err = $app->get('errors');
 
         // @link http://php.net/manual/en/function.set-error-handler.php
-        set_error_handler([$err, 'errHandler']);
+        @set_error_handler([$err, 'errHandler']);
         // @link http://php.net/manual/en/function.set-exception-handler.php
-        set_exception_handler([$err, 'excHandler']);
+        @set_exception_handler([$err, 'excHandler']);
 
         if ($enable) {
             error_reporting(E_ALL);
