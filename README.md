@@ -13,7 +13,7 @@ Just another simple yet modular PHP Application :grin:
 Simply create new composer project.
 
 ```bash
-$ composer create-prject feryardiant/tokonlen my-app
+$ composer create-project feryardiant/tokonlen my-app
 $ cd my-app
 ```
 
