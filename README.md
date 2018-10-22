@@ -13,7 +13,7 @@ Just another simple yet modular PHP Application :grin:
 Simply clone this repo to your local directory then `cd` into it.
 
 ```bash
-$ git clone git@github.com/feryardiant/tokonlen --depth 1 my-app
+$ git clone git@github.com:feryardiant/tokonlen.git --depth 1 my-app
 $ cd my-app
 ```
 **Note**: use `--depth 1` option to clone only one last commit history.
@@ -40,7 +40,7 @@ everything is done, now you should open the `[baseurl]` from your favorite web b
 
 ## Usage & Demo
 
-Live demo is available here: [http://tokonlen.projek.xyz/](http://tokonlen.projek.xyz/)
+Live demo is available here: [https://tokonlen.herokuapp.com/](https://tokonlen.herokuapp.com/)
 
 Use these credential to login into it
 
