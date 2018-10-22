@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 --
 -- Table structure for table `tbl_banner`
 --
@@ -224,3 +226,5 @@ ADD CONSTRAINT produk_author FOREIGN KEY (id_pengguna)
   REFERENCES tbl_pengguna (id_pengguna) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT produk_kategori FOREIGN KEY (id_kategori)
   REFERENCES tbl_kategori (id_kategori) ON DELETE CASCADE ON UPDATE CASCADE;
+
+SET FOREIGN_KEY_CHECKS = 1;
