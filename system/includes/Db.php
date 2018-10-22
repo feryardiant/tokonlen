@@ -73,7 +73,7 @@ class Db
 
     /**
      * Eksekutor
-     * ---------------------------------------------------------------------- 
+     * ----------------------------------------------------------------------
 */
 
     /**
@@ -93,30 +93,25 @@ class Db
             $sql = vsprintf($sql, $args);
         }
 
-        try {
-            // Return 'false' kalo belum ada koneksi
-            if (!$this->_db) {
-                $this->connect();
+        // Return 'false' kalo belum ada koneksi
+        if (!$this->_db) {
+            $this->connect();
+        }
+
+        $this->_sql = $sql;
+
+        // Eksekusi SQL Query
+        if ($results = $this->_db->query($sql)) {
+            if (is_bool($results)) {
+                return $results;
             }
 
-            $this->_sql = $sql;
+            $this->_results = $results;
+            $this->_num_rows = $this->_results->num_rows;
 
-            // Eksekusi SQL Query
-            if ($results = $this->_db->query($sql)) {
-                if (is_bool($results)) {
-                    return $results;
-                }
-
-                $this->_results = $results;
-                $this->_num_rows = $this->_results->num_rows;
-
-                return $this;
-            } else {
-                App::error($this->_db->error.'<br>'.$this->_sql);
-            }
-        } catch (Exception $e) {
-            set_alert('error', $e->getMessage());
-            return false;
+            return $this;
+        } else {
+            App::error($this->_db->error.'<br>'.$this->_sql);
         }
     }
 
@@ -204,7 +199,7 @@ class Db
 
     /**
      * Utama
-     * ---------------------------------------------------------------------- 
+     * ----------------------------------------------------------------------
 */
 
     /**
@@ -257,7 +252,7 @@ class Db
      */
     public function insert($table, $data = [])
     {
-        if (empty($data)) { return false; 
+        if (empty($data)) { return false;
         }
 
         $values = [];
@@ -300,7 +295,7 @@ class Db
      */
     public function update($table, $data = [], $where = [])
     {
-        if (empty($data)) { return false; 
+        if (empty($data)) { return false;
         }
 
         $wheres = $this->_parseWhere($where);
@@ -352,7 +347,8 @@ class Db
         $query = '';
 
         foreach ($lines as $line) {
-            if (substr($line, 0, 2) == '--' or $line == '') { continue; 
+            if (substr($line, 0, 2) == '--' or $line == '') {
+                continue;
             }
 
             $query .= trim($line).' ';
@@ -407,7 +403,7 @@ class Db
      */
     public function _parseWhere($where)
     {
-        if (empty($where)) { return; 
+        if (empty($where)) { return;
         }
         $return = 'WHERE';
 
