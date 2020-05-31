@@ -2,7 +2,7 @@
 
 /**
  * Base Helper
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
 */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @return object
  */
-function app($container = '') 
+function app($container = '')
 {
     $app =& App::instance();
 
@@ -28,7 +28,7 @@ function app($container = '')
  * @param  mixed  $value Nilai Konfigurasi
  * @return mixed
  */
-function conf($key = null, $value = null) 
+function conf($key = null, $value = null)
 {
     static $conf;
 
@@ -45,7 +45,7 @@ function conf($key = null, $value = null)
 
 /**
  * URL
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
 */
 
 /**
@@ -54,7 +54,7 @@ function conf($key = null, $value = null)
  * @param  string  Permalink
  * @return string
  */
-function site_url($permalink = '') 
+function site_url($permalink = '')
 {
     if (in_array(substr($permalink, 0, 1), ['#', '?'])) {
         $permalink = app('uri')->path().$permalink;
@@ -69,7 +69,7 @@ function site_url($permalink = '')
  * @param  string $permalink URL tambahan bila perlu
  * @return string
  */
-function current_url($permalink = '', $trim = false) 
+function current_url($permalink = '', $trim = false)
 {
     $req = !empty($_GET) ? '?'.http_build_query($_GET) : '';
     $url = site_url(app('uri')->path().$req);
@@ -91,7 +91,7 @@ function current_url($permalink = '', $trim = false)
  * @param  string $url URL Tujuan
  * @return bool
  */
-function redirect($url = '', $delay = false) 
+function redirect($url = '', $delay = false)
 {
     if (PHP_SAPI != 'cli') {
         $url = strpos('?', $url) === 1 ? current_url($url) : site_url($url);
@@ -111,7 +111,7 @@ function redirect($url = '', $delay = false)
 
 /**
  * Request Helper
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
 */
 
 /**
@@ -120,7 +120,7 @@ function redirect($url = '', $delay = false)
  * @param  string  Nama field
  * @return string
  */
-function req($key) 
+function req($key)
 {
     if (isset($_REQUEST[$key])) {
         return escape($_REQUEST[$key]);
@@ -134,7 +134,7 @@ function req($key)
  * @param  string  Nama field
  * @return string
  */
-function get($key) 
+function get($key)
 {
     if (isset($_GET[$key])) {
         return escape($_GET[$key]);
@@ -148,7 +148,7 @@ function get($key)
  * @param  string  Nama field
  * @return string
  */
-function post($key, $escape = true) 
+function post($key, $escape = true)
 {
     if (isset($_POST[$key])) {
         if (!is_array($_POST[$key]) and $escape === true) {
@@ -161,7 +161,7 @@ function post($key, $escape = true)
 
 /**
  * Page Alert
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
 */
 
 /**
@@ -170,7 +170,7 @@ function post($key, $escape = true)
  * @param string $type     Type alert
  * @param mixed  $messages Isi alert
  */
-function set_alert($type, $messages) 
+function set_alert($type, $messages)
 {
     // Jika tipe tidak terdaftar, maka $type = 'notice'
     if (!in_array($type, ['warning', 'error', 'notice', 'success'])) {
@@ -193,7 +193,7 @@ function set_alert($type, $messages)
  *
  * @return string
  */
-function show_alert() 
+function show_alert()
 {
     $out = '';
     $alerts = unserialize(session('flash'));
