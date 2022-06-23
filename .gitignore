@@ -15,6 +15,7 @@ _*
 /asset/uploads/*
 /system/configs.php
 /vendor/
+/.vscode/
 /.htaccess
 /.php-version
 
