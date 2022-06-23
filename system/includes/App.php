@@ -14,7 +14,11 @@ class App
     // Buffer Level
     private $buffer;
 
-    // Instance aplikasi
+    /**
+     * App Instance
+     *
+     * @var App
+     */
     private static $instance = null;
 
     /**
@@ -115,7 +119,7 @@ class App
     /**
      * Method untuk mendapatkan instansi dari class
      *
-     * @return  resource
+     * @return  self
      */
     public static function &instance()
     {
@@ -127,7 +131,7 @@ class App
      * @link    http://php.net/manual/en/language.oop5.magic.php#object.invoke
      *
      * @param   string  $container  Nama container
-     * @return  App
+     * @return  mixed
      */
     public function __invoke($container = '')
     {

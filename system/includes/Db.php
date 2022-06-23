@@ -458,13 +458,14 @@ class Db
      *
      * @return string
      */
-    function getInsertId()
+    public function getInsertId()
     {
         if ($this->_db) {
             if (isset($this->_db->insert_id)) {
                 return $this->_db->insert_id;
             }
-            return mysqli_insert_id();
+
+            return mysqli_insert_id($this->_db);
         }
     }
 
@@ -474,10 +475,11 @@ class Db
      * @param  string $str Karakter yang akan disaring
      * @return string
      */
-    function escape($str)
+    public function escape($str)
     {
         if ($this->_db) {
             return $this->_db->real_escape_string($str);
         }
+        return $str;
     }
 }
